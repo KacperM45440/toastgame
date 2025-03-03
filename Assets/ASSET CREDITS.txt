@@ -1,2 +1,9 @@
 Polygonal Mind - Coffee Maker Character - https://poly.pizza/m/MJ1vx6fykK
-Rig + Animacje - Mixamo.com
+
+Rig + Animations - Mixamo.com
+
+Borodar - Farland Skies Cloudy Crown - https://assetstore.unity.com/packages/2d/textures-materials/sky/farland-skies-cloudy-crown-60004
+
+Broken Vector - Ultimate Low Poly Dungeon - https://assetstore.unity.com/packages/3d/environments/dungeons/ultimate-low-poly-dungeon-143535
+
+Toaster by John Mason-Smith [CC-BY] via Poly Pizza - https://poly.pizza/m/6Aoke0DThxh
