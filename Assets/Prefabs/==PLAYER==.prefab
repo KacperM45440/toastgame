@@ -89,7 +89,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.74
+  m_Radius: 0.75
   m_Height: 4.5
   m_Direction: 1
   m_Center: {x: 0, y: 2.25, z: -0.05}
@@ -139,7 +139,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 84
+  m_Constraints: 116
   m_CollisionDetection: 2
 --- !u!114 &8798225055984391285
 MonoBehaviour:
@@ -153,8 +153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33ddc67874669bb4e86bd453e0c027f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 7
-  rotationSpeed: 270
+  movementSpeed: 15
+  rotationSpeed: 360
   bodyRef: {fileID: 3142981084730250739}
   movementVector: {x: 0, y: 0, z: 0}
 --- !u!114 &3763147070088175996

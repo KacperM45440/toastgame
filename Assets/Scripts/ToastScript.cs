@@ -2,18 +2,17 @@ using UnityEngine;
 
 public class ToastScript : MonoBehaviour
 {
+    [SerializeField] private Rigidbody bodyRef;
     [SerializeField] private PlayerScore scoreRef;
     [SerializeField] private Collider plateCollider;
     [SerializeField] private Collider groundCollider;
     [SerializeField] private MeshRenderer meshReference;
     [SerializeField] private Material goodToast;
     [SerializeField] private Material badToast;
-    [SerializeField] private float rotationSpeed = 30.0f;
+    [SerializeField] private float rotationSpeed = 720.0f;
     private Vector3 targetPosition;
     private bool toastType;
-    private int toastID = -1;
     private int scoreToAdd = 0;
-    private bool inAir = false;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -30,35 +29,39 @@ public class ToastScript : MonoBehaviour
         }
     }
 
-    public void SpawnToast(int givenID, bool givenType, Vector3 givenPosition)
+    private void Update()
+    {
+        SpinToast();
+    }
+
+    public void SpawnToast(bool givenType, Vector3 givenPosition)
     {
         targetPosition = givenPosition;
         toastType = givenType;
-        toastID = givenID;
 
-        if (givenType)
+        if (toastType)
         {
-            meshReference.material = goodToast;
+            meshReference.materials[0] = goodToast;
             scoreToAdd = 1;
         }
         else
         {
-            meshReference.material = badToast;
+            meshReference.materials[0] = badToast;
             scoreToAdd = -1;
         }
+
+        transform.position = targetPosition;
     }
 
     private void SpinToast()
     {
-        //while (inAir)
-        //{
-        //    float rotation = rotationSpeed * Time.deltaTime;
-        //    transform.Rotate(rotation, 0, 0);
-        //}
+        float rotation = rotationSpeed * Time.deltaTime;
+        transform.Rotate(rotation, 0, 0);
     }
 
     private void ToastCollected()
     {
+        Debug.Log("Got toast!");
         scoreRef.AddScore(scoreToAdd);
         ResetToast();
     }
@@ -70,7 +73,7 @@ public class ToastScript : MonoBehaviour
 
     private void ResetToast()
     {
-        transform.position = targetPosition;
+        bodyRef.linearVelocity = Vector3.zero;
         gameObject.SetActive(false);
     }
 }

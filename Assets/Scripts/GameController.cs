@@ -6,13 +6,14 @@ public class GameController : MonoBehaviour
     [SerializeField] private PlayerScore scoreRef;
     [SerializeField] private PlayerMovement movementRef;
     [SerializeField] private ToastSpawner toasterRef;
-    [SerializeField] private float targetTime = 99f;
+    [SerializeField] private float targetTime = 100f;
     [SerializeField] private TMP_Text timerText;
     private bool gameStarted = false;
 
     public void GameStart()
     {
         gameStarted = true;
+        ManageToaster();
     }
     private void Update()
     {
@@ -27,9 +28,12 @@ public class GameController : MonoBehaviour
         }
 
         targetTime -= Time.deltaTime;
-        
         UpdateUI();
-        ManageToaster();
+
+        if (((int)targetTime % 10 == 0) && toasterRef.ToastRoutineNull())
+        {
+            ManageToaster();
+        }
 
         if (targetTime <= 0.0f)
         {
@@ -39,7 +43,21 @@ public class GameController : MonoBehaviour
 
     private void ManageToaster()
     {
-        //todo
+        int toastAmount = 2;
+
+        for (int i = 0; i < 10; i++)
+        {
+            if (i * 10 >= targetTime)
+            {
+                toastAmount = (10 - i) * 2 + 1;
+                toasterRef.PopToasts(toastAmount, 10f);
+                break;
+            }
+            else
+            {
+                toasterRef.PopToasts(toastAmount, 9f);
+            }
+        }
     }
 
     private void UpdateUI()
