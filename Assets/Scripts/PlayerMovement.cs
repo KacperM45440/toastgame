@@ -20,4 +20,9 @@ public class PlayerMovement : MonoBehaviour
 
         transform.Rotate(0, movementVector.y * rotationSpeed * Time.fixedDeltaTime, 0);
     }
+
+    public void ResetPlayerPosition()
+    {
+        bodyRef.transform.position = new Vector3(0, 0, 6);
+    }
 }

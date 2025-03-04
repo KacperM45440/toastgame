@@ -4,9 +4,9 @@ public class PlayerScore : MonoBehaviour
 {
     private int currentScore = 0;
 
-    public void AddScore()
+    public void AddScore(int givenScore)
     {
-        currentScore++;
+        currentScore += givenScore;
     }
 
     public void ResetScore()
