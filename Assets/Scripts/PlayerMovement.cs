@@ -2,15 +2,22 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float movementSpeed = 10.0f;
-    [SerializeField] private float rotationSpeed = 100.0f;
+    [SerializeField] private float movementSpeed = 7.0f;
+    [SerializeField] private float rotationSpeed = 270.0f;
+    [SerializeField] private Rigidbody bodyRef;
+    [SerializeField] private Vector3 movementVector;
 
     private void Update()
     {
-        float translation = Input.GetAxis("Vertical") * movementSpeed * Time.deltaTime;
-        float rotation = Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime;
+        movementVector = new Vector3(0, Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+    }
 
-        transform.Translate(0, 0, translation);
-        transform.Rotate(0, rotation, 0);
+    private void FixedUpdate()
+    {
+        Vector3 direction = new(0, 0, movementVector.z * movementSpeed * Time.fixedDeltaTime * 100f);
+        direction = bodyRef.rotation * direction;
+        bodyRef.linearVelocity = direction;
+
+        transform.Rotate(0, movementVector.y * rotationSpeed * Time.fixedDeltaTime, 0);
     }
 }

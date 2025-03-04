@@ -1,9 +1,11 @@
 Polygonal Mind - Coffee Maker Character - https://poly.pizza/m/MJ1vx6fykK
 
-Rig + Animations - Mixamo.com
+Rig - Mixamo.com
 
 Borodar - Farland Skies Cloudy Crown - https://assetstore.unity.com/packages/2d/textures-materials/sky/farland-skies-cloudy-crown-60004
 
 Broken Vector - Ultimate Low Poly Dungeon - https://assetstore.unity.com/packages/3d/environments/dungeons/ultimate-low-poly-dungeon-143535
 
 Kenney - Furniture Kit - https://poly.pizza/bundle/Furniture-Kit-NoG1sEUD1z
+
+Yodah_the_cat - Stylized bread serving - https://assetstore.unity.com/packages/3d/props/food/stylized-bread-serving-279531
