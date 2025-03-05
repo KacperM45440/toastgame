@@ -32,7 +32,7 @@ public class GameController : MonoBehaviour
         targetTime -= Time.deltaTime;
         UpdateUI();
 
-        if (((int)targetTime % 10 == 0) && toasterRef.ToastRoutineNull())
+        if (((int)targetTime % 10 == 0) && toasterRef.IsToastRoutineNull())
         {
             ManageToaster();
         }
@@ -81,9 +81,10 @@ public class GameController : MonoBehaviour
 
     public void GameReset()
     {
-        targetTime = 99f;
+        targetTime = 100f;
         scoreRef.ResetScore();
         movementRef.ResetPlayerPosition();
+        toasterRef.ResetScene();
     }
 
     private IEnumerator GameStartRoutine()

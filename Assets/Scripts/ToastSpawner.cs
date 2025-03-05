@@ -134,7 +134,7 @@ public class ToastSpawner : MonoBehaviour
         };
     }
 
-    public bool ToastRoutineNull()
+    public bool IsToastRoutineNull()
     {
         return ToastRoutine == null;
     }
@@ -165,4 +165,30 @@ public class ToastSpawner : MonoBehaviour
 
         ToastRoutine = null;
     }
+
+    public void ResetScene()
+    {
+        foreach (Transform t in breadParent)
+        {
+            t.gameObject.SetActive(false);
+        }
+
+        foreach (Transform t in secondBreadParent)
+        {
+            t.gameObject.SetActive(false);
+        }
+
+        foreach (Transform t in particleParent)
+        {
+            t.gameObject.SetActive(false);
+        }
+
+        if (ToastRoutine != null)
+        {
+            StopCoroutine(ToastRoutine);
+        }
+        
+        ToastRoutine = null;
+    }
+
 }

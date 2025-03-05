@@ -24,5 +24,6 @@ public class PlayerMovement : MonoBehaviour
     public void ResetPlayerPosition()
     {
         bodyRef.transform.position = new Vector3(0, 0, 6);
+        bodyRef.transform.rotation = new Quaternion(0, 1, 0, 0);
     }
 }
