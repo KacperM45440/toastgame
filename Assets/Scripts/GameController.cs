@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour
 
     public void GameStart()
     {
+        GameReset();
         gameStarted = true;
         StartCoroutine(GameStartRoutine());
     }
@@ -81,6 +82,7 @@ public class GameController : MonoBehaviour
 
     public void GameReset()
     {
+        gameStarted = false;
         targetTime = 100f;
         scoreRef.ResetScore();
         movementRef.ResetPlayerPosition();
