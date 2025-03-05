@@ -14,6 +14,10 @@ public class GameController : MonoBehaviour
     [SerializeField] private TMP_Text scoreText;
     private bool gameStarted = false;
 
+    private void Awake()
+    {
+        Application.targetFrameRate = 100;
+    }
     public void GameStart()
     {
         GameReset();
