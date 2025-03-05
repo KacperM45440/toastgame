@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -51,13 +52,11 @@ public class GameController : MonoBehaviour
             {
                 toastAmount = (10 - i) * 2 + 1;
                 toasterRef.PopToasts(toastAmount, 10f);
-                break;
-            }
-            else
-            {
-                toasterRef.PopToasts(toastAmount, 9f);
+                return;
             }
         }
+
+        toasterRef.PopToasts(toastAmount, 8f);
     }
 
     private void UpdateUI()
@@ -76,12 +75,11 @@ public class GameController : MonoBehaviour
 
     private void GameFinished()
     {
-        //todo
+        gameStarted = false;
     }
 
     public void GameReset()
     {
-        gameStarted = false;
         targetTime = 99f;
         scoreRef.ResetScore();
         movementRef.ResetPlayerPosition();

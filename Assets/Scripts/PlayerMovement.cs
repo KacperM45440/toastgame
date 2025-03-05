@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float movementSpeed = 15.0f;
-    [SerializeField] private float rotationSpeed = 360.0f;
+    [SerializeField] private float movementSpeed = 30.0f;
+    [SerializeField] private float rotationSpeed = 720.0f;
     [SerializeField] private Rigidbody bodyRef;
     [SerializeField] private Vector3 movementVector;
 

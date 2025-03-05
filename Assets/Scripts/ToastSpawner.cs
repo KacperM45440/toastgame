@@ -1,9 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+
 public class ToastSpawner : MonoBehaviour
 {
     [SerializeField] private Transform breadParent;
+    [SerializeField] private Transform particleParent;
     private Dictionary<int, Vector3> spawnPositions;
     private IEnumerator ToastRoutine = null;
 
@@ -32,12 +34,21 @@ public class ToastSpawner : MonoBehaviour
             toastType = false;
         }
 
-        Debug.Log(toastType);
-
         GameObject selectedToast = breadParent.GetChild(toastID).gameObject;
         selectedToast.GetComponent<ToastScript>().SpawnToast(toastType, position);
         selectedToast.SetActive(true);
     }
+
+    private void ReadyParticle(int particleID, Vector3 position)
+    {
+        Vector3 newPosition = new(position.x, 0.1f, position.z);
+        GameObject selectedParticle = particleParent.GetChild(particleID).gameObject;
+        selectedParticle.transform.position = newPosition;
+        selectedParticle.SetActive(true);
+        selectedParticle.GetComponent<ParticleSystem>().Clear();
+        selectedParticle.GetComponent<ParticleSystem>().Play();
+    }
+
     private List<Vector3> GetToastPositions(int positionAmount)
     {
         if (positionAmount > spawnPositions.Count)
@@ -128,6 +139,7 @@ public class ToastSpawner : MonoBehaviour
         for (int i = 0; i < amount; i++)
         {
             ReadyToast(i, toastsToSpawn[i]);
+            ReadyParticle(i, toastsToSpawn[i]);
             yield return new WaitForSeconds(time / amount);
         }
 

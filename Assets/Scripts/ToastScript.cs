@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class ToastScript : MonoBehaviour
@@ -10,6 +11,7 @@ public class ToastScript : MonoBehaviour
     [SerializeField] private Material goodToast;
     [SerializeField] private Material badToast;
     [SerializeField] private float rotationSpeed = 720.0f;
+
     private Vector3 targetPosition;
     private bool toastType;
     private int scoreToAdd = 0;

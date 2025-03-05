@@ -153,8 +153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33ddc67874669bb4e86bd453e0c027f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 15
-  rotationSpeed: 360
+  movementSpeed: 30
+  rotationSpeed: 720
   bodyRef: {fileID: 3142981084730250739}
   movementVector: {x: 0, y: 0, z: 0}
 --- !u!114 &3763147070088175996
