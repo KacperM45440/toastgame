@@ -20,33 +20,18 @@ public class ToastSpawner : MonoBehaviour
         StartCoroutine(ToastRoutine);
     }
 
-    private void ReadyToast(int toastID, Vector3 position)
+    private void ReadyToast(int toastID, Vector3 position, bool toastType)
     {
-        bool toastType;
-        int toastChance = Random.Range(0, 101);
-
-        if (toastChance <= 90)
-        {
-            toastType = true;
-        }
-        else
-        {
-            toastType = false;
-        }
-
         GameObject selectedToast = breadParent.GetChild(toastID).gameObject;
         selectedToast.GetComponent<ToastScript>().SpawnToast(toastType, position);
         selectedToast.SetActive(true);
     }
 
-    private void ReadyParticle(int particleID, Vector3 position)
+    private void ReadyParticle(int particleID, Vector3 position, bool toastType)
     {
-        Vector3 newPosition = new(position.x, 0.1f, position.z);
         GameObject selectedParticle = particleParent.GetChild(particleID).gameObject;
-        selectedParticle.transform.position = newPosition;
+        selectedParticle.GetComponent<ParticleScript>().SpawnParticle(toastType, position);
         selectedParticle.SetActive(true);
-        selectedParticle.GetComponent<ParticleSystem>().Clear();
-        selectedParticle.GetComponent<ParticleSystem>().Play();
     }
 
     private List<Vector3> GetToastPositions(int positionAmount)
@@ -138,8 +123,20 @@ public class ToastSpawner : MonoBehaviour
         
         for (int i = 0; i < amount; i++)
         {
-            ReadyToast(i, toastsToSpawn[i]);
-            ReadyParticle(i, toastsToSpawn[i]);
+            bool toastType;
+            int toastChance = Random.Range(0, 101);
+
+            if (toastChance <= 90)
+            {
+                toastType = true;
+            }
+            else
+            {
+                toastType = false;
+            }
+
+            ReadyToast(i, toastsToSpawn[i], toastType);
+            ReadyParticle(i, toastsToSpawn[i], toastType);
             yield return new WaitForSeconds(time / amount);
         }
 

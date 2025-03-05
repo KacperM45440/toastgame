@@ -12,6 +12,7 @@ public class ToastScript : MonoBehaviour
     [SerializeField] private Material badToast;
     [SerializeField] private float rotationSpeed = 720.0f;
 
+    private Material[] materials = new Material[1];
     private Vector3 targetPosition;
     private bool toastType;
     private int scoreToAdd = 0;
@@ -43,12 +44,14 @@ public class ToastScript : MonoBehaviour
 
         if (toastType)
         {
-            meshReference.materials[0] = goodToast;
+            materials[0] = goodToast;
+            meshReference.materials = materials;
             scoreToAdd = 1;
         }
         else
         {
-            meshReference.materials[0] = badToast;
+            materials[0] = badToast;
+            meshReference.materials = materials;
             scoreToAdd = -1;
         }
 
@@ -63,7 +66,6 @@ public class ToastScript : MonoBehaviour
 
     private void ToastCollected()
     {
-        Debug.Log("Got toast!");
         scoreRef.AddScore(scoreToAdd);
         ResetToast();
     }
