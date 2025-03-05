@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerScore : MonoBehaviour
 {
+    private int finalScore = 0;
     private int currentScore = 0;
 
     public void AddScore(int givenScore)
@@ -12,5 +13,12 @@ public class PlayerScore : MonoBehaviour
     public void ResetScore()
     {
         currentScore = 0;
+        finalScore = 0;
+    }
+
+    public int GetFinalScore()
+    {
+        finalScore = currentScore;
+        return finalScore;
     }
 }

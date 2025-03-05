@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ public class GameController : MonoBehaviour
     public void GameStart()
     {
         gameStarted = true;
-        ManageToaster();
+        StartCoroutine(GameStartRoutine());
     }
     private void Update()
     {
@@ -83,5 +84,11 @@ public class GameController : MonoBehaviour
         targetTime = 99f;
         scoreRef.ResetScore();
         movementRef.ResetPlayerPosition();
+    }
+
+    private IEnumerator GameStartRoutine()
+    {
+        yield return null;
+        ManageToaster();
     }
 }

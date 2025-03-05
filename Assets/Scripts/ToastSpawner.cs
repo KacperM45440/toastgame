@@ -1,11 +1,16 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.UIElements;
 
 public class ToastSpawner : MonoBehaviour
 {
     [SerializeField] private Transform breadParent;
+    [SerializeField] private Transform secondBreadParent;
     [SerializeField] private Transform particleParent;
+
+    private Vector3 toasterLeftPos = new Vector3(-13.4589996f, 5.27780819f, -7.93316507f);
+    private Vector3 toasterRightPos = new Vector3(-13.3520002f, 5.27780819f, -8.30700016f);
     private Dictionary<int, Vector3> spawnPositions;
     private IEnumerator ToastRoutine = null;
 
@@ -18,6 +23,23 @@ public class ToastSpawner : MonoBehaviour
     {
         ToastRoutine = ToastCoroutine(amount, time);
         StartCoroutine(ToastRoutine);
+    }
+
+    public void ShootToast(int toastID, bool toastType)
+    {
+        Vector3 position;
+
+        if (toastID % 2 == 0)
+        {
+            position = toasterLeftPos;
+        }
+        else
+        {
+            position = toasterRightPos;
+        }
+
+        GameObject selectedToast = secondBreadParent.GetChild(toastID).gameObject;
+        selectedToast.GetComponent<ShootableToastScript>().Surface(toastType, position);
     }
 
     private void ReadyToast(int toastID, Vector3 position, bool toastType)
@@ -135,9 +157,10 @@ public class ToastSpawner : MonoBehaviour
                 toastType = false;
             }
 
+            yield return new WaitForSeconds(time / amount);
+            ShootToast(i, toastType);
             ReadyToast(i, toastsToSpawn[i], toastType);
             ReadyParticle(i, toastsToSpawn[i], toastType);
-            yield return new WaitForSeconds(time / amount);
         }
 
         ToastRoutine = null;
