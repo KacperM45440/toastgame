@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    [SerializeField] private UIController controllerRef;
     [SerializeField] private PlayerScore scoreRef;
     [SerializeField] private PlayerMovement movementRef;
     [SerializeField] private ToastSpawner toasterRef;
     [SerializeField] private float targetTime = 100f;
     [SerializeField] private TMP_Text timerText;
+    [SerializeField] private TMP_Text scoreText;
     private bool gameStarted = false;
 
     public void GameStart()
@@ -73,11 +75,14 @@ public class GameController : MonoBehaviour
         {
             timerText.text = "0";
         }
+
+        scoreText.text = scoreRef.GetCurrentScore().ToString();
     }
 
     private void GameFinished()
     {
         gameStarted = false;
+        controllerRef.FinishedGame();
     }
 
     public void GameReset()

@@ -10,6 +10,11 @@ public class PlayerScore : MonoBehaviour
         currentScore += givenScore;
     }
 
+    public int GetCurrentScore()
+    {
+        return currentScore;
+    }
+
     public void ResetScore()
     {
         currentScore = 0;

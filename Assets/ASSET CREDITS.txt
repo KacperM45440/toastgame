@@ -13,3 +13,7 @@ Yodah_the_cat - Stylized bread serving - https://assetstore.unity.com/packages/3
 SKJ - Particle Collection SKJ 2016_Free samples - https://assetstore.unity.com/packages/vfx/particles/particle-collection-skj-2016-free-samples-72399
 
 Michael Angeles - Balsamiq Sans - https://fonts.google.com/specimen/Balsamiq+Sans
+
+Icons - https://penzilla.itch.io/basic-gui-bundle
+
+game_travel - Clock - https://sketchfab.com/3d-models/clock-low-poly-a8bf334c411b4acaa2dcfc827f28ebf6

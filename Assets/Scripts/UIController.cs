@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class UIController : MonoBehaviour
 {
+    [SerializeField] private PlayerScore scoreRef;
     [SerializeField] private GameController controllerRef;
     [SerializeField] private RectTransform overlay;
     [SerializeField] private Animator menuAnimator;
@@ -12,7 +13,9 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject menuContentGO;
     [SerializeField] private GameObject overlayGO;
     [SerializeField] private GameObject pauseMenuGO;
+    [SerializeField] private GameObject gameConcludeGO;
     [SerializeField] private TMP_Text overlayCountdown;
+    [SerializeField] private TMP_Text finalScoreText;
 
     private void Update()
     {
@@ -31,10 +34,20 @@ public class UIController : MonoBehaviour
     public void RestartGame()
     {
         controllerRef.GameStart();
+        gameConcludeGO.SetActive(false);
         pauseMenuGO.SetActive(false);
         overlayCountdown.gameObject.SetActive(true);
         overlayGO.SetActive(true);
         StartCoroutine(CountdownRoutine());
+    }
+
+    public void FinishedGame()
+    {
+        pauseMenuGO.SetActive(false);
+        overlayCountdown.gameObject.SetActive(false);
+        gameConcludeGO.SetActive(true);
+        overlayGO.SetActive(true);
+        finalScoreText.text = scoreRef.GetFinalScore().ToString();
     }
 
     public void ReturnToMenu()
@@ -57,6 +70,7 @@ public class UIController : MonoBehaviour
 
     public void ShowPauseMenu()
     {
+        gameConcludeGO.SetActive(false);
         pauseMenuGO.SetActive(true);
         overlay.gameObject.SetActive(!overlay.gameObject.activeSelf);
     }
