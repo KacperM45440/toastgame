@@ -78,7 +78,6 @@ public class HandMovementController : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                // Sprawdza, czy trafiony obiekt ma tag 'test'
                 if (hit.collider.CompareTag("Grabbable"))
                 {
                     GrabObject(hit.collider.gameObject.GetComponent<GrabbableObject>());
