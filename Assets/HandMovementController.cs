@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.ShaderGraph;
 using UnityEngine;
+using UnityEngine.InputSystem.HID;
 
 public class HandMovementController : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class HandMovementController : MonoBehaviour
 
     private Vector2 mousePosition;
     private Vector3 startPos;
+    private Vector3 startScale;
+    private Quaternion startRot;
 
     private bool inControl = false;
 
@@ -32,6 +35,8 @@ public class HandMovementController : MonoBehaviour
             mainCamera = Camera.main;
         }
         startPos = transform.position;
+        startRot = transform.rotation;
+        startScale = transform.lossyScale;
         handRigidbody = GetComponent<Rigidbody>();
 
         inControl = true;
@@ -102,7 +107,14 @@ public class HandMovementController : MonoBehaviour
         Debug.Log("Trafiono obiekt z tagiem 'Grabbable': " + obj.transform.name);
         heldGrabbable = obj;
         heldGrabbable.Grabbed(this);
-        gameObject.transform.parent = heldGrabbable.mainRb.transform;
+        transform.position = new Vector3(transform.position.x, transform.position.y, obj.transform.position.z - 0.5f); // to tez, aby zawsze blizej kamery bylo
+        transform.parent = obj.transform;
+        Vector3 objScale = obj.transform.lossyScale;
+        transform.localScale = new Vector3(
+            startScale.x / objScale.x,
+            startScale.y / objScale.y,
+            startScale.z * objScale.z//ta skala jest z zle zrobiona, trzeba ostatecznie poprawic
+        );
         handRigidbody.mass = 0;
         handRigidbody.isKinematic = true;
     }
@@ -112,8 +124,11 @@ public class HandMovementController : MonoBehaviour
         Debug.Log("Puszczam: " + obj.transform.name);
         heldGrabbable.Dropped();
         heldGrabbable = null;
-        gameObject.transform.parent = null;
+        transform.parent = null;
         handRigidbody.mass = 1;
         handRigidbody.isKinematic = false;
+        transform.position = transform.position + new Vector3(0, 0, startPos.z);
+        transform.rotation = startRot;
+        transform.localScale = startScale;
     }
 }
