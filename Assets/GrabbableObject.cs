@@ -1,16 +1,16 @@
+using UnityEditor.ShaderGraph;
 using UnityEngine;
 
 public class GrabbableObject : MonoBehaviour
 {
-    [HideInInspector] public HandMovementController handController;
-
     public Rigidbody mainRb;
-    public SpringJoint jointRef;
+    public SpringJoint springJoint;
 
     private Camera mainCamera;
     private Vector2 mousePosition;
+    private Vector3 startPos;
 
-    private float moveSpeed;
+    private GameObject cursorObject;
     private bool isHeld = false;
     
     public virtual void Start()
@@ -19,50 +19,27 @@ public class GrabbableObject : MonoBehaviour
         {
             mainRb = GetComponent<Rigidbody>();
         }
-        if (jointRef == null)
-        {
-            jointRef = GetComponent<SpringJoint>();
-        }
-        Debug.Log(mainRb.position);
-    }
 
-    public virtual void FixedUpdate()
-    {
-        MoveObject();
-    }
-
-    private void MoveObject()
-    {
-        if (!isHeld)
-        {
-            return;
-        }
-        mousePosition = Input.mousePosition;
-        Vector3 mouseWorldPosition = mainCamera.ScreenToWorldPoint(new Vector3(
-            mousePosition.x,
-            mousePosition.y,
-            Mathf.Abs(mainCamera.transform.position.z - mainRb.position.z)
-        ));
-
-        Vector3 targetPosition = new Vector3(mouseWorldPosition.x, mouseWorldPosition.y, mainRb.position.z);
-
-        Vector3 newPosition = Vector3.MoveTowards(mainRb.position, targetPosition, moveSpeed * Time.deltaTime);
-        mainRb.MovePosition(newPosition);
+        startPos = transform.position;
     }
 
     public virtual void Grabbed(HandMovementController handControllerRef)
     {
-        handController = handControllerRef;
-        //isHeld = true;
-        jointRef.connectedBody = handControllerRef.handRigidbody;
-        moveSpeed = handController.moveSpeed;
-        mainCamera = handController.mainCamera;
+        if(cursorObject == null)
+        {
+            cursorObject = handControllerRef.cursorObject;
+        }
+
+        isHeld = true;
+        mainRb.useGravity = false;
+        springJoint = mainRb.gameObject.AddComponent<SpringJoint>();
+        springJoint.connectedBody = cursorObject.GetComponent<Rigidbody>();
     }
 
     public virtual void Dropped()
     {
-        handController = null;
         isHeld = false;
-        jointRef.connectedBody = null;
+        mainRb.useGravity = true;
+        Destroy(springJoint);
     }
 }
