@@ -1,6 +1,6 @@
-using System;
 using UnityEngine;
 
+// This script handles the behaviour of falling toast GameObjects
 public class ToastScript : MonoBehaviour
 {
     [SerializeField] private Rigidbody bodyRef;
@@ -12,11 +12,13 @@ public class ToastScript : MonoBehaviour
     [SerializeField] private Material badToast;
     [SerializeField] private float rotationSpeed = 720.0f;
 
+    // Workaround for bug with applying materials
     private Material[] materials = new Material[1];
     private Vector3 targetPosition;
     private bool toastType;
     private int scoreToAdd = 0;
 
+    // Check if toast collider and player collider touched
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == plateCollider.gameObject)
@@ -37,6 +39,14 @@ public class ToastScript : MonoBehaviour
         SpinToast();
     }
 
+    private void SpinToast()
+    {
+        float rotation = rotationSpeed * Time.deltaTime;
+        transform.Rotate(rotation, 0, 0);
+    }
+
+    // This method only prepares the GameObject in scene based on given data
+    // For actual spawn logic, see ToastSpawner.cs
     public void SpawnToast(bool givenType, Vector3 givenPosition)
     {
         targetPosition = givenPosition;
@@ -58,12 +68,7 @@ public class ToastScript : MonoBehaviour
         transform.position = targetPosition;
     }
 
-    private void SpinToast()
-    {
-        float rotation = rotationSpeed * Time.deltaTime;
-        transform.Rotate(rotation, 0, 0);
-    }
-
+    // Add score based on toast type (can be negative)
     private void ToastCollected()
     {
         scoreRef.AddScore(scoreToAdd);

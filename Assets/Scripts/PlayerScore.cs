@@ -1,5 +1,8 @@
 using UnityEngine;
 
+// This script handles calculating the player score.
+// Private variables with public methods ensure that the exact conditions of
+// how player score is supposed to be increased remain constant across all classes.
 public class PlayerScore : MonoBehaviour
 {
     private int finalScore = 0;
