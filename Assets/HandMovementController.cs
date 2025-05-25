@@ -7,10 +7,6 @@ using UnityEngine.InputSystem.HID;
 
 public class HandMovementController : MonoBehaviour
 {
-    //dodaj nowy obiekt - skrypt goni¹cy zawsze kursor myszy
-    //model dloni musi gonic tamten element albo trzymany przedmiot
-    //trzymany przedmiot musi gonic tamten element na podsstawie spring jointa
-
     public float moveSpeed = 20f;
 
     public GameObject cursorObject;
@@ -80,7 +76,7 @@ public class HandMovementController : MonoBehaviour
             {
                 if (hit.collider.CompareTag("Grabbable"))
                 {
-                    GrabObject(hit.collider.gameObject.GetComponent<GrabbableObject>());
+                    GrabObject(hit.collider.gameObject.GetComponent<GrabbableObject>(), hit.point);
                 }
                 else
                 {
@@ -101,12 +97,12 @@ public class HandMovementController : MonoBehaviour
         }
     }
 
-    private void GrabObject(GrabbableObject obj)
+    private void GrabObject(GrabbableObject obj, Vector3 grabPoint)
     {
         Debug.Log("Trafiono obiekt z tagiem 'Grabbable': " + obj.transform.name);
         heldGrabbable = obj;
         heldGrabbable.Grabbed(this);
-        transform.position = new Vector3(transform.position.x, transform.position.y, obj.transform.position.z - 0.5f); // to tez, aby zawsze blizej kamery bylo
+        transform.position = grabPoint + new Vector3(0, 0, - 0.3f);
         transform.parent = obj.transform;
         Vector3 objScale = obj.transform.lossyScale;
         transform.localScale = new Vector3(
