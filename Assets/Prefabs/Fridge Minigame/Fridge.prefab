@@ -113,6 +113,8 @@ GameObject:
   - component: {fileID: 7058361721419373583}
   - component: {fileID: 7131627822302297767}
   - component: {fileID: 7610341769007218268}
+  - component: {fileID: 7313397862379822685}
+  - component: {fileID: 4380001633117636451}
   m_Layer: 0
   m_Name: Fridge Colliders
   m_TagString: Untagged
@@ -219,6 +221,48 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4.88, y: 0.27, z: 3.39}
   m_Center: {x: -2.52, y: 2.83, z: 0}
+--- !u!65 &7313397862379822685
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932506046652629407}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.88, y: 0.27, z: 3.39}
+  m_Center: {x: -2.52, y: 4.87, z: 0}
+--- !u!65 &4380001633117636451
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932506046652629407}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.88, y: 0.27, z: 3.39}
+  m_Center: {x: -2.52, y: -3.4, z: 0}
 --- !u!1 &2389162587575115447
 GameObject:
   m_ObjectHideFlags: 0
