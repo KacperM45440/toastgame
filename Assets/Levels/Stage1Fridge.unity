@@ -5366,6 +5366,63 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!1001 &248657770
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5360209012336289522, guid: 71727c94278c6c541aef8f05c30e250b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.744
+      objectReference: {fileID: 0}
+    - target: {fileID: 5360209012336289522, guid: 71727c94278c6c541aef8f05c30e250b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.184
+      objectReference: {fileID: 0}
+    - target: {fileID: 5360209012336289522, guid: 71727c94278c6c541aef8f05c30e250b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.534
+      objectReference: {fileID: 0}
+    - target: {fileID: 5360209012336289522, guid: 71727c94278c6c541aef8f05c30e250b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.69891745
+      objectReference: {fileID: 0}
+    - target: {fileID: 5360209012336289522, guid: 71727c94278c6c541aef8f05c30e250b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.10730521
+      objectReference: {fileID: 0}
+    - target: {fileID: 5360209012336289522, guid: 71727c94278c6c541aef8f05c30e250b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.10730521
+      objectReference: {fileID: 0}
+    - target: {fileID: 5360209012336289522, guid: 71727c94278c6c541aef8f05c30e250b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.69891745
+      objectReference: {fileID: 0}
+    - target: {fileID: 5360209012336289522, guid: 71727c94278c6c541aef8f05c30e250b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5360209012336289522, guid: 71727c94278c6c541aef8f05c30e250b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -17.457
+      objectReference: {fileID: 0}
+    - target: {fileID: 5360209012336289522, guid: 71727c94278c6c541aef8f05c30e250b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5425616952650506211, guid: 71727c94278c6c541aef8f05c30e250b, type: 3}
+      propertyPath: m_Name
+      value: Grabbable Milk (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 71727c94278c6c541aef8f05c30e250b, type: 3}
 --- !u!1 &296172728
 GameObject:
   m_ObjectHideFlags: 0
@@ -7005,6 +7062,67 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!1001 &1226758859
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1453942644893496895, guid: c5ff0fbbe72c74242969f67cb82db4ad, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.306
+      objectReference: {fileID: 0}
+    - target: {fileID: 1453942644893496895, guid: c5ff0fbbe72c74242969f67cb82db4ad, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.885
+      objectReference: {fileID: 0}
+    - target: {fileID: 1453942644893496895, guid: c5ff0fbbe72c74242969f67cb82db4ad, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.455
+      objectReference: {fileID: 0}
+    - target: {fileID: 1453942644893496895, guid: c5ff0fbbe72c74242969f67cb82db4ad, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99013406
+      objectReference: {fileID: 0}
+    - target: {fileID: 1453942644893496895, guid: c5ff0fbbe72c74242969f67cb82db4ad, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1453942644893496895, guid: c5ff0fbbe72c74242969f67cb82db4ad, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.14012356
+      objectReference: {fileID: 0}
+    - target: {fileID: 1453942644893496895, guid: c5ff0fbbe72c74242969f67cb82db4ad, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1453942644893496895, guid: c5ff0fbbe72c74242969f67cb82db4ad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1453942644893496895, guid: c5ff0fbbe72c74242969f67cb82db4ad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -16.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1453942644893496895, guid: c5ff0fbbe72c74242969f67cb82db4ad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6549291263029709909, guid: c5ff0fbbe72c74242969f67cb82db4ad, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: aba7d24d18839c645965a34c51d2106b, type: 2}
+    - target: {fileID: 8092434649890557876, guid: c5ff0fbbe72c74242969f67cb82db4ad, type: 3}
+      propertyPath: m_Name
+      value: Grabbable Juice (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c5ff0fbbe72c74242969f67cb82db4ad, type: 3}
 --- !u!1 &1348969663
 GameObject:
   m_ObjectHideFlags: 0
@@ -8464,7 +8582,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5201904155495599260, guid: ea13083b89b3d6741aa8dfdad3b8130d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.039
+      value: -0.23
       objectReference: {fileID: 0}
     - target: {fileID: 5201904155495599260, guid: ea13083b89b3d6741aa8dfdad3b8130d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8552,6 +8670,8 @@ SceneRoots:
   - {fileID: 5777507443088261936}
   - {fileID: 8920311052846902045}
   - {fileID: 4525307886082113284}
+  - {fileID: 1226758859}
   - {fileID: 1806273007}
   - {fileID: 2874530461911308099}
+  - {fileID: 248657770}
   - {fileID: 6197244619268390647}
