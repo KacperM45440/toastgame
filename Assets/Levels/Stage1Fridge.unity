@@ -690,7 +690,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 20
   mainCamera: {fileID: 564409466}
-  cursorRb: {fileID: 0}
+  cursorRb: {fileID: 166738032}
+  particlesRef: {fileID: 166738031}
 --- !u!199 &166738030
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -715,7 +716,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a4614e960bfd24d4db60596edf201762, type: 2}
+  - {fileID: -1400836625916889992, guid: cee6745d57dea3240bbad5ae54a082cb, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -759,7 +760,7 @@ ParticleSystemRenderer:
   m_VertexStreams: 00010304
   m_UseCustomTrailVertexStreams: 0
   m_TrailVertexStreams: 00010304
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 7898551805005928994, guid: 86625a41f0af7074499be97a795a1006, type: 3}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
@@ -785,7 +786,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 1
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -851,7 +852,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.4
       minScalar: 5
       maxCurve:
         serializedVersion: 2

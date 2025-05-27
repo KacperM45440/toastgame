@@ -22,6 +22,8 @@ public class HandMovementController : MonoBehaviour
     private Vector3 startScale;
     private Quaternion startRot;
 
+    private CursorPosition cursorRef;
+
     private bool inControl = false;
 
     void Start()
@@ -34,6 +36,7 @@ public class HandMovementController : MonoBehaviour
         startRot = transform.rotation;
         startScale = transform.lossyScale;
         handRigidbody = GetComponent<Rigidbody>();
+        cursorRef = cursorObject.GetComponent<CursorPosition>();
 
         inControl = true;
     }
@@ -112,6 +115,7 @@ public class HandMovementController : MonoBehaviour
         );
         handRigidbody.mass = 0;
         handRigidbody.isKinematic = true;
+        cursorRef.PlayParticles(true);
     }
 
     private void DropObject(GrabbableObject obj)
@@ -125,5 +129,6 @@ public class HandMovementController : MonoBehaviour
         transform.position = transform.position + new Vector3(0, 0, startPos.z);
         transform.rotation = startRot;
         transform.localScale = startScale;
+        cursorRef.PlayParticles(false);
     }
 }

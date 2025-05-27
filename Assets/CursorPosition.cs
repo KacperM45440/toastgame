@@ -7,6 +7,7 @@ public class CursorPosition : MonoBehaviour
 
     public Camera mainCamera;
     public Rigidbody cursorRb;
+    public ParticleSystem particlesRef;
 
     private Vector2 cursorPosition;
     private Vector3 startPos;
@@ -17,6 +18,7 @@ public class CursorPosition : MonoBehaviour
             mainCamera = Camera.main;
         }
         cursorRb = GetComponent<Rigidbody>();
+        particlesRef = GetComponent<ParticleSystem>();
         startPos = transform.position;
     }
 
@@ -36,5 +38,17 @@ public class CursorPosition : MonoBehaviour
 
         Vector3 targetPosition = new Vector3(cursorWorldPosition.x, cursorWorldPosition.y, startPos.z);
         transform.position = targetPosition;
+    }
+
+    public void PlayParticles(bool play)
+    {
+        if (play)
+        {
+            particlesRef.Play();
+        }
+        else
+        {
+            particlesRef.Stop();
+        }
     }
 }

@@ -186,9 +186,9 @@ MonoBehaviour:
   isBread: 0
   boxMaterials:
   - {fileID: 2100000, guid: fc15852a84945f24b97cabf0c99366c9, type: 2}
-  - {fileID: 2100000, guid: 169a1b8f06c17c84e8de491f2bfef986, type: 2}
   - {fileID: -6922793697723135513, guid: 28233b714169d574daed4d28e59eca73, type: 3}
   - {fileID: 2100000, guid: 1a201393dedf1154eac012260de6d7a4, type: 2}
+  - {fileID: 2100000, guid: aba7d24d18839c645965a34c51d2106b, type: 2}
   rendererRef: {fileID: 6549291263029709909}
 --- !u!1 &8935289067495682504
 GameObject:
