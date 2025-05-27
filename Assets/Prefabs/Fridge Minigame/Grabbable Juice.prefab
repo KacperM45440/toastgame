@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 1453942644893496895}
   - component: {fileID: 6356314931600763357}
   - component: {fileID: 3875608990051418015}
-  - component: {fileID: 6726798942695351368}
+  - component: {fileID: 5856556098742939973}
   m_Layer: 6
   m_Name: Grabbable Juice
   m_TagString: Grabbable
@@ -169,7 +169,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.44, y: 0.84, z: 0.35}
   m_Center: {x: 0, y: 0.01, z: 0}
---- !u!114 &6726798942695351368
+--- !u!114 &5856556098742939973
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -178,12 +178,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 8092434649890557876}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcf546fa2e095fa48be5139b9c7bf493, type: 3}
+  m_Script: {fileID: 11500000, guid: 97f29cca21586954393a7ec116487398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mainRb: {fileID: 6356314931600763357}
   springJoint: {fileID: 0}
   isBread: 0
+  boxMaterials:
+  - {fileID: 2100000, guid: fc15852a84945f24b97cabf0c99366c9, type: 2}
+  - {fileID: 2100000, guid: 169a1b8f06c17c84e8de491f2bfef986, type: 2}
+  - {fileID: -6922793697723135513, guid: 28233b714169d574daed4d28e59eca73, type: 3}
+  - {fileID: 2100000, guid: 1a201393dedf1154eac012260de6d7a4, type: 2}
+  rendererRef: {fileID: 6549291263029709909}
 --- !u!1 &8935289067495682504
 GameObject:
   m_ObjectHideFlags: 0

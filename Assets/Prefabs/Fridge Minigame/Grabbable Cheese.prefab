@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 866384067772331742}
   - component: {fileID: 3555512455161708581}
   - component: {fileID: 5207241793404833602}
-  - component: {fileID: 7462525941321922097}
+  - component: {fileID: 6790835844996517221}
   m_Layer: 6
   m_Name: Grabbable Cheese
   m_TagString: Grabbable
@@ -30,7 +30,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.179, y: 2.935, z: 4.13}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6636373456444311347}
   m_Father: {fileID: 0}
@@ -83,7 +83,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.26, y: 0.73, z: 0.63}
   m_Center: {x: 0.12, y: 0, z: 0}
---- !u!114 &7462525941321922097
+--- !u!114 &6790835844996517221
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,12 +92,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6975783157518401509}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcf546fa2e095fa48be5139b9c7bf493, type: 3}
+  m_Script: {fileID: 11500000, guid: 4bcdc3c8bc18e814ba488c09c92bcace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mainRb: {fileID: 3555512455161708581}
   springJoint: {fileID: 0}
   isBread: 0
+  maxScale: 1.1
+  minScale: 0.7
 --- !u!1 &7278595253334006956
 GameObject:
   m_ObjectHideFlags: 0

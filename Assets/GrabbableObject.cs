@@ -4,7 +4,7 @@ using UnityEngine;
 public class GrabbableObject : MonoBehaviour
 {
     public Rigidbody mainRb;
-    public SpringJoint springJoint;
+    [HideInInspector] public SpringJoint springJoint;
     public bool isBread = false;
 
     private Camera mainCamera;
