@@ -11,6 +11,13 @@ public class CursorPosition : MonoBehaviour
 
     private Vector2 cursorPosition;
     private Vector3 startPos;
+
+    // Define boundaries in viewport coordinates (0 to 1)
+    [Range(0, 1)] public float minX = 0.1f;
+    [Range(0, 1)] public float maxX = 0.9f;
+    [Range(0, 1)] public float minY = 0.1f;
+    [Range(0, 1)] public float maxY = 0.9f;
+
     void Start()
     {
         if (mainCamera == null)
@@ -30,9 +37,15 @@ public class CursorPosition : MonoBehaviour
     private void MoveHand()
     {
         cursorPosition = Input.mousePosition;
+        Vector3 viewportPos = mainCamera.ScreenToViewportPoint(cursorPosition);
+
+        viewportPos.x = Mathf.Clamp(viewportPos.x, minX, maxX);
+        viewportPos.y = Mathf.Clamp(viewportPos.y, minY, maxY);
+
+        Vector3 clampedScreenPos = mainCamera.ViewportToScreenPoint(viewportPos);
         Vector3 cursorWorldPosition = mainCamera.ScreenToWorldPoint(new Vector3(
-            cursorPosition.x,
-            cursorPosition.y,
+            clampedScreenPos.x,
+            clampedScreenPos.y,
             Mathf.Abs(mainCamera.transform.position.z - transform.position.z)
         ));
 

@@ -29,7 +29,7 @@ public class HandMovementController : MonoBehaviour
     private bool inControl = false;
     private bool holdingBread = false;
 
-    void Start()
+    private void Start()
     {
         if (mainCamera == null)
         {
@@ -40,11 +40,9 @@ public class HandMovementController : MonoBehaviour
         startScale = transform.lossyScale;
         handRigidbody = GetComponent<Rigidbody>();
         cursorRef = cursorObject.GetComponent<CursorPosition>();
-
-        inControl = true;
     }
 
-    void Update()
+    private void Update()
     {
         CheckGrabbing();
     }
@@ -52,6 +50,11 @@ public class HandMovementController : MonoBehaviour
     void FixedUpdate()
     {
         MoveHand();
+    }
+
+    public void GainControl()
+    {
+        inControl = true;
     }
 
     private void MoveHand()
@@ -75,7 +78,6 @@ public class HandMovementController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("chwytam");
             Ray ray = new Ray(transform.position, transform.forward);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
@@ -114,7 +116,6 @@ public class HandMovementController : MonoBehaviour
 
     private void DropObject(GrabbableObject obj)
     {
-        Debug.Log("Puszczam: " + obj.transform.name);
         heldGrabbable.Dropped();
         heldGrabbable = null;
         transform.parent = null;
@@ -132,6 +133,6 @@ public class HandMovementController : MonoBehaviour
         Vector3 forwardDistance = new Vector3(0, 0, -5f);
         bread.transform.position += forwardDistance;
         transform.position += forwardDistance;
-        controller.Win();
+        controller.MinigameFinished(true);
     }
 }
