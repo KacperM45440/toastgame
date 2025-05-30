@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5201904155495599260}
   - component: {fileID: 5231709260777829518}
   - component: {fileID: 6320051196003595797}
-  - component: {fileID: 8793627224167717461}
+  - component: {fileID: 1637117655994871696}
   m_Layer: 6
   m_Name: Grabbable Bread
   m_TagString: Grabbable
@@ -45,7 +45,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 4
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -83,7 +83,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.463, y: 0.819, z: 0.7}
   m_Center: {x: 0, y: 0.15, z: 0}
---- !u!114 &8793627224167717461
+--- !u!114 &1637117655994871696
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,12 +92,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1062608155997316283}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcf546fa2e095fa48be5139b9c7bf493, type: 3}
+  m_Script: {fileID: 11500000, guid: 82e2edcb1b1c99d4c8f6dd14b2f6dddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mainRb: {fileID: 5231709260777829518}
   springJoint: {fileID: 0}
-  isBread: 1
 --- !u!1 &6546085947786852396
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,7 +108,7 @@ GameObject:
   - component: {fileID: 1212245516840831138}
   - component: {fileID: 7775468172758435282}
   - component: {fileID: 6439497400064982485}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: toast_bread
   m_TagString: Untagged
   m_Icon: {fileID: 0}

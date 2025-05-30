@@ -14,6 +14,8 @@ public class HandMovementController : MonoBehaviour
     public Camera mainCamera;
     public Rigidbody handRigidbody;
 
+    [SerializeField] private MinigameFridgeController controller;
+
     private Joint jointRef;
     private GrabbableObject heldGrabbable;
 
@@ -25,6 +27,7 @@ public class HandMovementController : MonoBehaviour
     private CursorPosition cursorRef;
 
     private bool inControl = false;
+    private bool holdingBread = false;
 
     void Start()
     {
@@ -65,7 +68,7 @@ public class HandMovementController : MonoBehaviour
 
     void CheckGrabbing()
     {
-        if (!inControl)
+        if (!inControl || holdingBread)
         {
             return;
         }
@@ -81,14 +84,6 @@ public class HandMovementController : MonoBehaviour
                 {
                     GrabObject(hit.collider.gameObject.GetComponent<GrabbableObject>(), hit.point);
                 }
-                else
-                {
-                    Debug.Log("Trafiono obiekt, ale z innym tagiem: " + hit.collider.tag);
-                }
-            }
-            else
-            {
-                Debug.Log("Pusta ³apa");
             }
         }
         else if (Input.GetMouseButtonUp(0))
@@ -102,10 +97,9 @@ public class HandMovementController : MonoBehaviour
 
     private void GrabObject(GrabbableObject obj, Vector3 grabPoint)
     {
-        Debug.Log("Trafiono obiekt z tagiem 'Grabbable': " + obj.transform.name);
+        transform.position = grabPoint + new Vector3(0, 0, -0.3f);
         heldGrabbable = obj;
         heldGrabbable.Grabbed(this);
-        transform.position = grabPoint + new Vector3(0, 0, - 0.3f);
         transform.parent = obj.transform;
         Vector3 objScale = obj.transform.lossyScale;
         transform.localScale = new Vector3(
@@ -130,5 +124,14 @@ public class HandMovementController : MonoBehaviour
         transform.rotation = startRot;
         transform.localScale = startScale;
         cursorRef.PlayParticles(false);
+    }
+
+    public void FoundBread(GameObject bread)
+    {
+        holdingBread = true;
+        Vector3 forwardDistance = new Vector3(0, 0, -5f);
+        bread.transform.position += forwardDistance;
+        transform.position += forwardDistance;
+        controller.Win();
     }
 }

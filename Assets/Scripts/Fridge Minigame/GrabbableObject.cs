@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEditor.ShaderGraph;
 using UnityEngine;
 
@@ -5,14 +6,14 @@ public class GrabbableObject : MonoBehaviour
 {
     public Rigidbody mainRb;
     [HideInInspector] public SpringJoint springJoint;
-    public bool isBread = false;
 
     private Camera mainCamera;
     private Vector2 mousePosition;
     private Vector3 startPos;
 
     private GameObject cursorObject;
-    private bool isHeld = false;
+
+    protected bool isHeld = false;
     
     public virtual void Start()
     {
