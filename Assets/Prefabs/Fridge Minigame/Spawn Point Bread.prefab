@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1710952283659850263
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1433983519307628072}
+  - component: {fileID: 3374925519196954517}
+  m_Layer: 6
+  m_Name: Spawn Point Bread
+  m_TagString: Untagged
+  m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1433983519307628072
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1710952283659850263}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3374925519196954517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1710952283659850263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd9692b961edac14c8eb52c59a795ce2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  possibleSpawnedObjects:
+  - {fileID: 5558966933889678517, guid: d4ddf4b2584722246b656c9f7be24951, type: 3}
+  - {fileID: 6975783157518401509, guid: 7d161a2180bba994b953218ec164f03c, type: 3}
+  - {fileID: 5497750434108684421, guid: 0bb1fe749db5c64498a4d27dc1b958c7, type: 3}
+  - {fileID: 5905954710401940908, guid: 09d31c879b3c7c74cadec2843b05d78d, type: 3}
+  - {fileID: 8092434649890557876, guid: c5ff0fbbe72c74242969f67cb82db4ad, type: 3}
+  - {fileID: 5425616952650506211, guid: 71727c94278c6c541aef8f05c30e250b, type: 3}
+  canSpawnBread: 1
