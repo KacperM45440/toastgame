@@ -18,12 +18,16 @@ public class MinigameFridgeController : MonoBehaviour
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private float targetTime = 30f;
 
+    private Camera cam;
     private float currentTime = 0;
     private bool gameStarted = false;
+    private bool fridgeLoaded = false;
+    private bool isOrthographic = false;
 
     private void Start()
     {
-        //Todo: remove on scene merge
+        //Todo: remove all below lines on scene merge
+        cam = Camera.main;
         SetupMinigame();
     }
 
@@ -42,6 +46,12 @@ public class MinigameFridgeController : MonoBehaviour
     //Begin time counter and give control to the player
     public void StartMinigame()
     {
+        if (!fridgeLoaded)
+        {
+            return;
+        }
+        ToggleCameraMode();//Remove after merging and incorporate into camera movement
+
         gameStarted = true;
         handController.GainControl();
     }
@@ -67,6 +77,13 @@ public class MinigameFridgeController : MonoBehaviour
         StartCoroutine(CloseFridge());
     }
 
+    public void ToggleCameraMode()
+    {
+        //Œciemnij ekran
+        isOrthographic = !isOrthographic;
+        cam.orthographic = isOrthographic;
+    }
+
     private void MinigameLoop()
     {
         if (!gameStarted)
@@ -85,6 +102,17 @@ public class MinigameFridgeController : MonoBehaviour
 
     private void SpawnFridgeContents()
     {
+        StartCoroutine(SpawnRoutine());
+    }
+
+    private void ClearFridgeContents()
+    {
+        StartCoroutine(DestroyRoutine());
+    }
+
+    private IEnumerator SpawnRoutine()
+    {
+        yield return null;
         bool spawnedBread = false;
         spawnPoints = spawnPoints.OrderBy(x => Random.value).ToList();
         foreach (SpawnPoint spawnPoint in spawnPoints)
@@ -97,11 +125,7 @@ public class MinigameFridgeController : MonoBehaviour
             }
             spawnPoint.SpawnSpawnable();
         }
-    }
-
-    private void ClearFridgeContents()
-    {
-        StartCoroutine(DestroyRoutine());
+        fridgeLoaded = true;
     }
 
     private IEnumerator DestroyRoutine()

@@ -3,10 +3,11 @@ using UnityEngine;
 public class SpawnPoint : MonoBehaviour
 {
     public bool CanSpawnBread => canSpawnBread;
-    [SerializeField] private GameObject[] possibleSpawnedObjects;
 
+    [SerializeField] private GameObject[] possibleSpawnedObjects;
+    [SerializeField] private bool canSpawnBread = false;
+    
     private float heightAdjustment = 0f;
-    private bool canSpawnBread = false;
 
     //Spawn grabbable object, randomly chosen from the pool
     public void SpawnSpawnable()
