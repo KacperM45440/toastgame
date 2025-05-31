@@ -14,18 +14,23 @@ public class MinigameFridgeController : MonoBehaviour
     [SerializeField] private Rigidbody freezerDoorRb;
     [SerializeField] private Rigidbody leftDoorRb;
     [SerializeField] private Rigidbody rightDoorRb;
-    [SerializeField] private float targetTime = 30f;
     [SerializeField] private Button endButton;
     [SerializeField] private TMP_Text timerText;
     [SerializeField] private TMP_Text scoreText;
+    [SerializeField] private float targetTime = 30f;
 
     private float currentTime = 0;
     private bool gameStarted = false;
 
-    void Start()
+    private void Start()
     {
         //Debug only
         SetupMinigame();
+    }
+
+    private void Update()
+    {
+        MinigameLoop();
     }
 
     //Load required assets, spawn fridge contents, show UI elements etc.
@@ -42,14 +47,25 @@ public class MinigameFridgeController : MonoBehaviour
         handController.GainControl();
     }
 
+    public void MinigameFinished(bool playerWon)
+    {
+        gameStarted = false;
+
+        string endMessage = "You won!";
+        if (!playerWon)
+        {
+            endMessage = "You lost!";
+        }
+        endMessage += "\n" + (int)currentTime;
+
+        scoreText.text = endMessage;
+        scoreText.gameObject.SetActive(true);
+        endButton.gameObject.SetActive(true);
+    }
+
     public void CloseMinigame()
     {
         StartCoroutine(CloseFridge());
-    }
-
-    private void Update()
-    {
-        MinigameLoop();
     }
 
     private void MinigameLoop()
@@ -74,7 +90,7 @@ public class MinigameFridgeController : MonoBehaviour
         spawnPoints = spawnPoints.OrderBy(x => Random.value).ToList();
         foreach (var spawnPoint in spawnPoints)
         {
-            if(!spawnedBread && spawnPoint.canSpawnBread)
+            if(!spawnedBread && spawnPoint.CanSpawnBread)
             {
                 spawnedBread = true;
                 spawnPoint.SpawnBread(breadPrefab);
@@ -90,22 +106,6 @@ public class MinigameFridgeController : MonoBehaviour
         {
             Destroy(spawnPoint.gameObject);
         }
-    }
-
-    public void MinigameFinished(bool playerWon)
-    {
-        Debug.Log("Tally up points lads");
-        gameStarted = false;
-
-        string endMessage = "You won!";
-        if (!playerWon) {
-            endMessage = "You lost!";
-        }
-        endMessage += "\n" + (int)currentTime;
-
-        scoreText.text = endMessage;
-        scoreText.gameObject.SetActive(true);
-        endButton.gameObject.SetActive(true);
     }
 
     private IEnumerator CloseFridge()

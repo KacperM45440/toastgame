@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class GrabbableObject : MonoBehaviour
 {
-    public Rigidbody mainRb;
+    [HideInInspector] public Rigidbody mainRb;
     [HideInInspector] public SpringJoint springJoint;
 
     private Camera mainCamera;
     private Vector2 mousePosition;
     private Vector3 startPos;
-
     private GameObject cursorObject;
 
     protected bool isHeld = false;
@@ -29,7 +28,7 @@ public class GrabbableObject : MonoBehaviour
     {
         if(cursorObject == null)
         {
-            cursorObject = handControllerRef.cursorObject;
+            cursorObject = handControllerRef.CursorObject;
         }
 
         isHeld = true;

@@ -7,25 +7,21 @@ using UnityEngine.InputSystem.HID;
 
 public class HandMovementController : MonoBehaviour
 {
-    public float moveSpeed = 20f;
+    public GameObject CursorObject;
 
-    public GameObject cursorObject;
-    public GameObject handModel;
-    public Camera mainCamera;
-    public Rigidbody handRigidbody;
-
+    [SerializeField] private GameObject handModel;
+    [SerializeField] private Camera mainCamera;
+    [SerializeField] private Rigidbody handRigidbody;
     [SerializeField] private MinigameFridgeController controller;
+    [SerializeField] private float moveSpeed = 20f;
 
+    private CursorPosition cursorRef;
     private Joint jointRef;
     private GrabbableObject heldGrabbable;
-
     private Vector2 mousePosition;
     private Vector3 startPos;
     private Vector3 startScale;
     private Quaternion startRot;
-
-    private CursorPosition cursorRef;
-
     private bool inControl = false;
     private bool holdingBread = false;
 
@@ -39,7 +35,7 @@ public class HandMovementController : MonoBehaviour
         startRot = transform.rotation;
         startScale = transform.lossyScale;
         handRigidbody = GetComponent<Rigidbody>();
-        cursorRef = cursorObject.GetComponent<CursorPosition>();
+        cursorRef = CursorObject.GetComponent<CursorPosition>();
     }
 
     private void Update()
@@ -47,7 +43,7 @@ public class HandMovementController : MonoBehaviour
         CheckGrabbing();
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         MoveHand();
     }
@@ -57,6 +53,15 @@ public class HandMovementController : MonoBehaviour
         inControl = true;
     }
 
+    public void FoundBread(GameObject bread)
+    {
+        holdingBread = true;
+        Vector3 forwardDistance = new Vector3(0, 0, -5f);
+        bread.transform.position += forwardDistance;
+        transform.position += forwardDistance;
+        controller.MinigameFinished(true);
+    }
+
     private void MoveHand()
     {
         if (!inControl || heldGrabbable != null)
@@ -64,12 +69,12 @@ public class HandMovementController : MonoBehaviour
             return;
         }
 
-        Vector3 targetPosition = new Vector3(cursorObject.transform.position.x, cursorObject.transform.position.y, startPos.z);
+        Vector3 targetPosition = new Vector3(CursorObject.transform.position.x, CursorObject.transform.position.y, startPos.z);
         Vector3 newPosition = Vector3.MoveTowards(handRigidbody.position, targetPosition, moveSpeed * Time.deltaTime);
         handRigidbody.MovePosition(newPosition);
     }
 
-    void CheckGrabbing()
+    private void CheckGrabbing()
     {
         if (!inControl || holdingBread)
         {
@@ -107,7 +112,7 @@ public class HandMovementController : MonoBehaviour
         transform.localScale = new Vector3(
             startScale.x / objScale.x,
             startScale.y / objScale.y,
-            startScale.z * objScale.z//ta skala jest z zle zrobiona, trzeba ostatecznie poprawic
+            startScale.z * objScale.z//ta skala jest hardcoded - mo¿liwe, ¿e jeœli model rêki bêdzie Ÿle wygl¹da³, to przez to
         );
         handRigidbody.mass = 0;
         handRigidbody.isKinematic = true;
@@ -125,14 +130,5 @@ public class HandMovementController : MonoBehaviour
         transform.rotation = startRot;
         transform.localScale = startScale;
         cursorRef.PlayParticles(false);
-    }
-
-    public void FoundBread(GameObject bread)
-    {
-        holdingBread = true;
-        Vector3 forwardDistance = new Vector3(0, 0, -5f);
-        bread.transform.position += forwardDistance;
-        transform.position += forwardDistance;
-        controller.MinigameFinished(true);
     }
 }

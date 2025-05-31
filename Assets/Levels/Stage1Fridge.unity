@@ -294,12 +294,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed041af2a71664943a78a713165600b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 20
-  cursorObject: {fileID: 166738027}
+  CursorObject: {fileID: 166738027}
   handModel: {fileID: 2146857906}
   mainCamera: {fileID: 564409466}
   handRigidbody: {fileID: 146537681}
   controller: {fileID: 313774456}
+  moveSpeed: 20
 --- !u!4 &146537680
 Transform:
   m_ObjectHideFlags: 0
@@ -390,14 +390,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e95b4275a6836654eb0be2a90cb43a06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 20
   mainCamera: {fileID: 564409466}
   cursorRb: {fileID: 166738032}
   particlesRef: {fileID: 166738031}
-  minX: 0.1
-  maxX: 0.9
-  minY: 0.1
-  maxY: 0.9
+  clampX: {x: 0.1, y: 0.9}
+  clampY: {x: 0.1, y: 0.9}
+  moveSpeed: 50
 --- !u!199 &166738030
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -5315,10 +5313,10 @@ MonoBehaviour:
   freezerDoorRb: {fileID: 1371016963}
   leftDoorRb: {fileID: 233860207}
   rightDoorRb: {fileID: 392138769}
-  targetTime: 30
   endButton: {fileID: 92157339}
   timerText: {fileID: 2094723885}
   scoreText: {fileID: 795156926}
+  targetTime: 30
 --- !u!4 &313774457
 Transform:
   m_ObjectHideFlags: 0

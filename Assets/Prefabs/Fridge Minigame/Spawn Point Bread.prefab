@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd9692b961edac14c8eb52c59a795ce2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CanSpawnBread: 1
   possibleSpawnedObjects:
   - {fileID: 5558966933889678517, guid: d4ddf4b2584722246b656c9f7be24951, type: 3}
   - {fileID: 6975783157518401509, guid: 7d161a2180bba994b953218ec164f03c, type: 3}
@@ -51,4 +52,3 @@ MonoBehaviour:
   - {fileID: 5905954710401940908, guid: 09d31c879b3c7c74cadec2843b05d78d, type: 3}
   - {fileID: 8092434649890557876, guid: c5ff0fbbe72c74242969f67cb82db4ad, type: 3}
   - {fileID: 5425616952650506211, guid: 71727c94278c6c541aef8f05c30e250b, type: 3}
-  canSpawnBread: 1
