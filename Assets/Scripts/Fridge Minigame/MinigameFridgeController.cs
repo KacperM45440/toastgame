@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +23,7 @@ public class MinigameFridgeController : MonoBehaviour
 
     private void Start()
     {
-        //Debug only
+        //Todo: remove on scene merge
         SetupMinigame();
     }
 
@@ -88,9 +87,9 @@ public class MinigameFridgeController : MonoBehaviour
     {
         bool spawnedBread = false;
         spawnPoints = spawnPoints.OrderBy(x => Random.value).ToList();
-        foreach (var spawnPoint in spawnPoints)
+        foreach (SpawnPoint spawnPoint in spawnPoints)
         {
-            if(!spawnedBread && spawnPoint.CanSpawnBread)
+            if (!spawnedBread && spawnPoint.CanSpawnBread)
             {
                 spawnedBread = true;
                 spawnPoint.SpawnBread(breadPrefab);
@@ -102,7 +101,13 @@ public class MinigameFridgeController : MonoBehaviour
 
     private void ClearFridgeContents()
     {
-        foreach (var spawnPoint in spawnPoints)
+        StartCoroutine(DestroyRoutine());
+    }
+
+    private IEnumerator DestroyRoutine()
+    {
+        yield return null;
+        foreach (SpawnPoint spawnPoint in spawnPoints)
         {
             Destroy(spawnPoint.gameObject);
         }
@@ -121,9 +126,7 @@ public class MinigameFridgeController : MonoBehaviour
         rightDoorRb.AddForce(new Vector3(-5, 0, 1) * doorPower, ForceMode.Impulse);
         yield return new WaitForSeconds(3f);
 
-        //camera can now fly away or change of scenes
-        Debug.Log("END");
-
+        //camera can now fly away or scenes can change
         ClearFridgeContents();
     }
 }

@@ -1,14 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.ShaderGraph;
 using UnityEngine;
-using UnityEngine.InputSystem.HID;
 
 public class HandMovementController : MonoBehaviour
 {
-    public GameObject CursorObject;
-
+    [SerializeField] private GameObject cursorObject;
     [SerializeField] private GameObject handModel;
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Rigidbody handRigidbody;
@@ -16,9 +10,7 @@ public class HandMovementController : MonoBehaviour
     [SerializeField] private float moveSpeed = 20f;
 
     private CursorPosition cursorRef;
-    private Joint jointRef;
     private GrabbableObject heldGrabbable;
-    private Vector2 mousePosition;
     private Vector3 startPos;
     private Vector3 startScale;
     private Quaternion startRot;
@@ -27,15 +19,7 @@ public class HandMovementController : MonoBehaviour
 
     private void Start()
     {
-        if (mainCamera == null)
-        {
-            mainCamera = Camera.main;
-        }
-        startPos = transform.position;
-        startRot = transform.rotation;
-        startScale = transform.lossyScale;
-        handRigidbody = GetComponent<Rigidbody>();
-        cursorRef = CursorObject.GetComponent<CursorPosition>();
+        InitializeReferences();
     }
 
     private void Update()
@@ -46,6 +30,25 @@ public class HandMovementController : MonoBehaviour
     private void FixedUpdate()
     {
         MoveHand();
+    }
+
+    public GameObject GetCursor()
+    {
+        return cursorObject;
+    }
+
+    private void InitializeReferences()
+    {
+        if (mainCamera == null)
+        {
+            mainCamera = Camera.main;
+        }
+
+        startPos = transform.position;
+        startRot = transform.rotation;
+        startScale = transform.lossyScale;
+        handRigidbody = GetComponent<Rigidbody>();
+        cursorRef = cursorObject.GetComponent<CursorPosition>();
     }
 
     public void GainControl()
@@ -69,7 +72,7 @@ public class HandMovementController : MonoBehaviour
             return;
         }
 
-        Vector3 targetPosition = new Vector3(CursorObject.transform.position.x, CursorObject.transform.position.y, startPos.z);
+        Vector3 targetPosition = new Vector3(cursorObject.transform.position.x, cursorObject.transform.position.y, startPos.z);
         Vector3 newPosition = Vector3.MoveTowards(handRigidbody.position, targetPosition, moveSpeed * Time.deltaTime);
         handRigidbody.MovePosition(newPosition);
     }
@@ -83,9 +86,8 @@ public class HandMovementController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = new Ray(transform.position, transform.forward);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
+            Ray ray = new(transform.position, transform.forward);
+            if (Physics.Raycast(ray, out RaycastHit hit))
             {
                 if (hit.collider.CompareTag("Grabbable"))
                 {
@@ -97,7 +99,7 @@ public class HandMovementController : MonoBehaviour
         {
             if(heldGrabbable != null)
             {
-                DropObject(heldGrabbable);
+                DropObject();
             }
         }
     }
@@ -119,15 +121,14 @@ public class HandMovementController : MonoBehaviour
         cursorRef.PlayParticles(true);
     }
 
-    private void DropObject(GrabbableObject obj)
+    private void DropObject()
     {
         heldGrabbable.Dropped();
         heldGrabbable = null;
         transform.parent = null;
         handRigidbody.mass = 1;
         handRigidbody.isKinematic = false;
-        transform.position = transform.position + new Vector3(0, 0, startPos.z);
-        transform.rotation = startRot;
+        transform.SetPositionAndRotation(transform.position + new Vector3(0, 0, startPos.z), startRot);
         transform.localScale = startScale;
         cursorRef.PlayParticles(false);
     }

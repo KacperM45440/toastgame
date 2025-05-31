@@ -1,10 +1,8 @@
-using TMPro;
 using UnityEngine;
 
 public class CursorPosition : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;
-    [SerializeField] private Rigidbody cursorRb;
     [SerializeField] private ParticleSystem particlesRef;
     [SerializeField] private Vector2 clampX = new Vector2(0.1f, 0.9f);
     [SerializeField] private Vector2 clampY = new Vector2(0.1f, 0.9f);
@@ -14,18 +12,23 @@ public class CursorPosition : MonoBehaviour
 
     private void Start()
     {
-        if (mainCamera == null)
-        {
-            mainCamera = Camera.main;
-        }
-        cursorRb = GetComponent<Rigidbody>();
-        particlesRef = GetComponent<ParticleSystem>();
-        startPos = transform.position;
+        InitializeReferences();
     }
 
     private void Update()
     {
         MoveHand();
+    }
+
+    private void InitializeReferences()
+    {
+        if (mainCamera == null)
+        {
+            mainCamera = Camera.main;
+        }
+
+        particlesRef = GetComponent<ParticleSystem>();
+        startPos = transform.position;
     }
 
     public void PlayParticles(bool play)

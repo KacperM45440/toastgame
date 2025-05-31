@@ -1,5 +1,3 @@
-using Unity.VisualScripting;
-using UnityEditor.ShaderGraph;
 using UnityEngine;
 
 public class GrabbableObject : MonoBehaviour
@@ -7,28 +5,28 @@ public class GrabbableObject : MonoBehaviour
     [HideInInspector] public Rigidbody mainRb;
     [HideInInspector] public SpringJoint springJoint;
 
-    private Camera mainCamera;
-    private Vector2 mousePosition;
-    private Vector3 startPos;
     private GameObject cursorObject;
 
     protected bool isHeld = false;
     
     public virtual void Start()
     {
+        InitializeReferences();
+    }
+
+    private void InitializeReferences()
+    {
         if (mainRb == null)
         {
             mainRb = GetComponent<Rigidbody>();
         }
-
-        startPos = transform.position;
     }
 
     public virtual void Grabbed(HandMovementController handControllerRef)
     {
         if(cursorObject == null)
         {
-            cursorObject = handControllerRef.CursorObject;
+            cursorObject = handControllerRef.GetCursor();
         }
 
         isHeld = true;

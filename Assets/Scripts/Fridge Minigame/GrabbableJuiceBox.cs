@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,9 +9,11 @@ public class GrabbableJuiceBox : GrabbableObject
     public override void Start()
     {
         base.Start();
-        if (rendererRef != null)
+        if (rendererRef == null)
         {
-            rendererRef.material = boxMaterials[Random.Range(0, boxMaterials.Count)];
+            return;
         }
+
+        rendererRef.material = boxMaterials[Random.Range(0, boxMaterials.Count)];
     }
 }

@@ -1,13 +1,12 @@
-using NUnit.Framework;
 using UnityEngine;
 
 public class SpawnPoint : MonoBehaviour
 {
-    public bool CanSpawnBread = false;
-
+    public bool CanSpawnBread => canSpawnBread;
     [SerializeField] private GameObject[] possibleSpawnedObjects;
 
     private float heightAdjustment = 0f;
+    private bool canSpawnBread = false;
 
     //Spawn grabbable object, randomly chosen from the pool
     public void SpawnSpawnable()

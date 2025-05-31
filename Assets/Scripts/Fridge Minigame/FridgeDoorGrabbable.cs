@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class FridgeDoorGrabbable : GrabbableObject
 {
     public override void Grabbed(HandMovementController handControllerRef)

@@ -294,7 +294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed041af2a71664943a78a713165600b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CursorObject: {fileID: 166738027}
+  cursorObject: {fileID: 166738027}
   handModel: {fileID: 2146857906}
   mainCamera: {fileID: 564409466}
   handRigidbody: {fileID: 146537681}
@@ -391,11 +391,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 564409466}
-  cursorRb: {fileID: 166738032}
   particlesRef: {fileID: 166738031}
   clampX: {x: 0.1, y: 0.9}
   clampY: {x: 0.1, y: 0.9}
-  moveSpeed: 50
 --- !u!199 &166738030
 ParticleSystemRenderer:
   serializedVersion: 6
