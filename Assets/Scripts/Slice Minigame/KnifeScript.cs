@@ -2,11 +2,13 @@ using com.marufhow.meshslicer.core;
 using System.Collections;
 using System.Diagnostics;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
-public class MoveKnife : MonoBehaviour
+public class KnifeScript : MonoBehaviour
 {
     [SerializeField] private MHCutter mhCutter;
     [SerializeField] private GameObject breadGO;
+    [SerializeField] private GameObject outlineGO;
     [SerializeField] private float sideMoveSpeed = 3f;      
     [SerializeField] private float sideMaxDistance = 2f;    
     [SerializeField] private float verticalMoveSpeed = 1.5f;      
@@ -44,6 +46,11 @@ public class MoveKnife : MonoBehaviour
         startPosition = transform.position;
     }
 
+    private void HideOutline()
+    {
+        outlineGO.SetActive(false);
+    }
+
     private void StartMoving()
     {
         if(MoveRoutine != null)
@@ -71,6 +78,10 @@ public class MoveKnife : MonoBehaviour
         {
             return;
         }
+
+        float score = Mathf.Abs(transform.position.x - outlineGO.transform.position.x); //todo: add score
+        Debug.Log(score);
+        HideOutline();
 
         verticalTime.Start();
         MoveRoutine = MoveDownRoutine();        
