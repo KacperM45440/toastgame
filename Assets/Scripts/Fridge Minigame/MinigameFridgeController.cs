@@ -10,6 +10,7 @@ public class MinigameFridgeController : MonoBehaviour
     [SerializeField] private List<SpawnPoint> spawnPoints = new List<SpawnPoint>();
     [SerializeField] private HandMovementController handController;
     [SerializeField] private MainGameController gameController;
+    [SerializeField] private PlayerScore scoreRef;
     [SerializeField] private GameObject breadPrefab;
     [SerializeField] private Rigidbody freezerDoorRb;
     [SerializeField] private Rigidbody leftDoorRb;
@@ -21,6 +22,7 @@ public class MinigameFridgeController : MonoBehaviour
 
     private Camera cam;
     private float currentTime = 0;
+    private int gameScore = 0;
     private bool gameStarted = false;
     private bool fridgeLoaded = false;
     private bool isOrthographic = false;
@@ -29,7 +31,7 @@ public class MinigameFridgeController : MonoBehaviour
     {
         //Todo: remove all below lines on scene merge
         cam = Camera.main;
-        SetupMinigame();
+        //SetupMinigame();
     }
 
     private void Update()
@@ -40,7 +42,9 @@ public class MinigameFridgeController : MonoBehaviour
     //Load required assets, spawn fridge contents, show UI elements etc.
     public void SetupMinigame()
     {
-        currentTime = targetTime;
+        currentTime = targetTime + 1;
+        handController.gameObject.SetActive(true);
+        handController.GetCursor().SetActive(true);
         SpawnFridgeContents();
     }
 
@@ -60,17 +64,17 @@ public class MinigameFridgeController : MonoBehaviour
     public void MinigameFinished(bool playerWon)
     {
         gameStarted = false;
+        gameScore = (int)currentTime;
 
-        string endMessage = "You won!";
-        if (!playerWon)
-        {
-            endMessage = "You lost!";
-        }
-        endMessage += "\n" + (int)currentTime;
+        scoreRef.AddScore(gameScore);
+        gameController.FinishedMinigame();
 
-        scoreText.text = endMessage;
+        //do usuniêcia
+        /*
+        scoreText.text = gameScore.ToString();
         scoreText.gameObject.SetActive(true);
         endButton.gameObject.SetActive(true);
+        */
     }
 
     public void CloseMinigame()
@@ -108,6 +112,8 @@ public class MinigameFridgeController : MonoBehaviour
 
     private void ClearFridgeContents()
     {
+        handController.GetCursor().SetActive(false);
+        handController.gameObject.SetActive(false);
         StartCoroutine(DestroyRoutine());
     }
 
@@ -143,7 +149,7 @@ public class MinigameFridgeController : MonoBehaviour
     private IEnumerator CloseFridge()
     {
         float doorPower = 5f;
-        yield return new WaitForSeconds(0.5f);
+        //yield return new WaitForSeconds(0.5f);
         leftDoorRb.AddForce(new Vector3(-3, 0, -1) * doorPower, ForceMode.Impulse);
         yield return new WaitForSeconds(0.3f);
         freezerDoorRb.AddForce(new Vector3(-3, 0, 1) * doorPower, ForceMode.Impulse);

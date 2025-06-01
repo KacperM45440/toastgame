@@ -99,7 +99,7 @@ public class MinigameToastController : MonoBehaviour
             timerText.text = "0";
         }
 
-        scoreText.text = scoreRef.GetCurrentScore().ToString();
+        scoreText.text = scoreRef.GetCurrentMinigameScore().ToString();
     }
 
     // Conclude the game, set game variables so that all unnecessary running systems are stopped.
@@ -117,7 +117,7 @@ public class MinigameToastController : MonoBehaviour
     {
         gameStarted = false;
         targetTime = 100f;
-        scoreRef.ResetScore();
+        scoreRef.ResetMinigameScore();
         movementRef.ResetPlayerPosition();
         toasterRef.ResetScene();
     }

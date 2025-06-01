@@ -1,10 +1,12 @@
 using System.Collections;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class MainGameController : MonoBehaviour
 {
     [HideInInspector] public bool MinigameLoaded { get; set; }
 
+    [SerializeField] private UIController uiControllerRef;
     [SerializeField] MinigameFridgeController minigame1Controller;
     //[SerializeField] MinigameKnifeController minigame2Controller;
     [SerializeField] MinigameToastController minigame3Controller;
@@ -16,13 +18,43 @@ public class MainGameController : MonoBehaviour
     //Activates setup of 1st minigame and starts camera movement
     public void StartGame()
     {
-        minigame1Controller.SetupMinigame();
-        MoveCamera(new Vector3(2, 5, -8), new Quaternion(0, 0.707106829f, 0, 0.707106829f), false);
+        SetupNextMinigame();
     }
 
-    public void MinigameReady()
+    public void FinishedMinigame() {
+        uiControllerRef.ShowMinigameScoreMenu();
+
+        currentMinigame++;
+    }
+
+    public string GetCurrentMinigameName()
     {
-        BeginNextMinigame();
+        switch (currentMinigame)
+        {
+            case 0:
+                return "Fridge Finder";
+            case 1:
+                return "Bread Cutter";
+            case 2:
+                return "Toast Catcher";
+            default:
+                return "Unknown";
+        }
+    }
+
+    public string GetCurrentMinigameDescription()
+    {
+        switch (currentMinigame)
+        {
+            case 0:
+                return "Open the fridge and find the bread";
+            case 1:
+                return "x2";
+            case 2:
+                return "xx3";
+            default:
+                return "Unknown";
+        }
     }
 
     //Activated with UI buttons
@@ -32,11 +64,31 @@ public class MainGameController : MonoBehaviour
         {
             return;
         }
-        currentMinigame++;
         switch (currentMinigame)
         {
-            case 1:
+            case 0:
                 minigame1Controller.StartMinigame();
+                break;
+            case 1:
+                Debug.Log("Run minigame 2");
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void SetupNextMinigame()
+    {
+        switch (currentMinigame)
+        {
+            case 0:
+                minigame1Controller.SetupMinigame();
+                MoveCamera(new Vector3(0, 5, -2.5f), new Quaternion(0, 0, 0, 0), false);
+                break;
+            case 1:
+                minigame1Controller.CloseMinigame();
+                Debug.Log("Setup minigame 2");
+                MoveCamera(new Vector3(0, 0, 0f), new Quaternion(0, 0, 0, 0), true);
                 break;
             default:
                 break;
@@ -56,5 +108,6 @@ public class MainGameController : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
 
+        uiControllerRef.ShowMinigameInstructionsMenu();
     }
 }

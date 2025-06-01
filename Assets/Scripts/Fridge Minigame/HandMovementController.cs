@@ -56,6 +56,7 @@ public class HandMovementController : MonoBehaviour
     public void GainControl()
     {
         inControl = true;
+        cursorRef.GainControl();
     }
 
     public void FoundBread(GameObject bread)

@@ -19,7 +19,12 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject overlayGO;
     [SerializeField] private GameObject pauseMenuGO;
     [SerializeField] private GameObject gameConcludeGO;
-    [SerializeField] private GameObject minigameInstructions;
+    [SerializeField] private GameObject minigameInstructionsGO;
+    [SerializeField] private GameObject minigameScoreGO;
+    [SerializeField] private TMP_Text minigameInstructionsNameText;
+    [SerializeField] private TMP_Text minigameInstructionsDescriptionText;
+    [SerializeField] private TMP_Text minigameScoreNameText;
+    [SerializeField] private TMP_Text minigameScoreValueText;
     [SerializeField] private TMP_Text overlayCountdown;
     [SerializeField] private TMP_Text finalScoreText;
 
@@ -32,7 +37,7 @@ public class UIController : MonoBehaviour
     public void PlayGame()
     {
         menuAnimator.SetTrigger("Play");
-        RestartGame();
+        overlayGO.SetActive(false);
         controllerRef.StartGame();
     }
 
@@ -89,6 +94,29 @@ public class UIController : MonoBehaviour
         overlay.gameObject.SetActive(!overlay.gameObject.activeSelf);
     }
 
+    public void ShowMinigameInstructionsMenu()
+    {
+        minigameInstructionsGO.SetActive(true);
+        minigameInstructionsNameText.name = controllerRef.GetCurrentMinigameName();
+        minigameInstructionsDescriptionText.text = controllerRef.GetCurrentMinigameDescription();
+        overlay.gameObject.SetActive(true);
+    }
+
+    public void ShowMinigameScoreMenu()
+    {
+        minigameScoreGO.SetActive(true);
+        minigameInstructionsNameText.name = controllerRef.GetCurrentMinigameName();
+        overlay.gameObject.SetActive(true);
+        StartCoroutine(UpdateScore());
+    }
+
+    public void StartMinigameCountdown()
+    {
+        minigameInstructionsGO.SetActive(false);
+        overlayCountdown.gameObject.SetActive(true);
+        StartCoroutine(CountdownRoutine());
+    }
+
     public void QuitGame()
     {
         Application.Quit();
@@ -100,6 +128,48 @@ public class UIController : MonoBehaviour
         {
             ShowPauseMenu();
         }
+    }
+
+    private IEnumerator UpdateScore()
+    {
+        int currentUI = int.Parse(minigameScoreValueText.text);
+        int targetScore = scoreRef.GetFinalScore();
+
+        Debug.Log(currentUI);
+        Debug.Log(targetScore);
+
+        float waitTime = 0.5f;
+        float rotation = 1f;
+        yield return new WaitForSeconds(waitTime);
+        while (currentUI < targetScore)
+        {
+            currentUI++;
+            minigameScoreValueText.text = currentUI.ToString();
+            minigameScoreValueText.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
+            rotation = -(rotation * 1.1f);
+            minigameScoreValueText.transform.Rotate(new Vector3(0, 0, rotation));
+
+            yield return new WaitForSeconds(waitTime);
+            waitTime *= 0.8f;
+        }
+        yield return new WaitForSeconds(2f);
+
+        /*
+        while (Vector3.Distance(minigameScoreValueText.transform.localScale, Vector3.one) > 0.1f)
+        {
+            Vector3.MoveTowards(minigameScoreValueText.transform.localScale, Vector3.one, 0.1f);
+            Vector3.MoveTowards(minigameScoreValueText.transform.rotation.eulerAngles, Vector3.zero, 1f);
+            yield return null;
+        }
+        */
+
+        minigameScoreGO.SetActive(false);
+        overlayGO.SetActive(false);
+
+        minigameScoreValueText.transform.localScale = Vector3.zero;
+        minigameScoreValueText.transform.rotation = Quaternion.Euler(0, 0, 0);
+
+        controllerRef.SetupNextMinigame();
     }
 
     // Enable the half-transparent overlay, and count down to minigame start
@@ -115,5 +185,6 @@ public class UIController : MonoBehaviour
         yield return new WaitForSeconds(1f);
         overlayCountdown.gameObject.SetActive(false);
         overlayGO.SetActive(false);
+        controllerRef.BeginNextMinigame();
     }
 }

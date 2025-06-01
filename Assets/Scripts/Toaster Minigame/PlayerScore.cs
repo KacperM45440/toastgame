@@ -6,27 +6,26 @@ using UnityEngine;
 public class PlayerScore : MonoBehaviour
 {
     private int finalScore = 0;
-    private int currentScore = 0;
+    private int currentMinigameScore = 0;
 
     public void AddScore(int givenScore)
     {
-        currentScore += givenScore;
+        currentMinigameScore += givenScore;
+        finalScore += givenScore;
     }
 
-    public int GetCurrentScore()
+    public void ResetMinigameScore()
     {
-        return currentScore;
+        currentMinigameScore = 0;
     }
 
-    public void ResetScore()
+    public int GetCurrentMinigameScore()
     {
-        currentScore = 0;
-        finalScore = 0;
+        return currentMinigameScore;
     }
 
     public int GetFinalScore()
     {
-        finalScore = currentScore;
         return finalScore;
     }
 }
