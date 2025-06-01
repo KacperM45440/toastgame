@@ -6,7 +6,7 @@ using UnityEngine;
 // Only because this is a smaller project, it's okay-ish to have a single class responsible
 // for ensuring the changes to minigames, UI and other necessary data.
 // It's also easier to do in a scenario where we're doing everything on a single Unity scene
-public class GameController : MonoBehaviour
+public class MinigameToastController : MonoBehaviour
 {
     [SerializeField] private UIController uiControllerRef;
     [SerializeField] private PlayerScore scoreRef;

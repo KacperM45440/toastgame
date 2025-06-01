@@ -9,7 +9,8 @@ using UnityEngine;
 public class UIController : MonoBehaviour
 {
     [SerializeField] private PlayerScore scoreRef;
-    [SerializeField] private GameController controllerRef;
+    [SerializeField] private MainGameController controllerRef;
+    //[SerializeField] private MinigameToastController controllerRef;
     [SerializeField] private RectTransform overlay;
     [SerializeField] private Animator menuAnimator;
 
@@ -18,6 +19,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject overlayGO;
     [SerializeField] private GameObject pauseMenuGO;
     [SerializeField] private GameObject gameConcludeGO;
+    [SerializeField] private GameObject minigameInstructions;
     [SerializeField] private TMP_Text overlayCountdown;
     [SerializeField] private TMP_Text finalScoreText;
 
@@ -31,13 +33,14 @@ public class UIController : MonoBehaviour
     {
         menuAnimator.SetTrigger("Play");
         RestartGame();
+        controllerRef.StartGame();
     }
 
     // Disable all other UI elements, and restart the game
     // Play animation of game begin countdown
     public void RestartGame()
     {
-        controllerRef.GameStart();
+        //controllerRef.GameStart();
         gameConcludeGO.SetActive(false);
         pauseMenuGO.SetActive(false);
         overlayCountdown.gameObject.SetActive(true);
@@ -60,7 +63,7 @@ public class UIController : MonoBehaviour
     // Return to the game's menu (title/splash screen)
     public void ReturnToMenu()
     {
-        controllerRef.GameReset();
+        //controllerRef.GameReset();
         menuAnimator.SetTrigger("Return");
     }
 

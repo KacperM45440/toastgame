@@ -9,6 +9,7 @@ public class MinigameFridgeController : MonoBehaviour
 {
     [SerializeField] private List<SpawnPoint> spawnPoints = new List<SpawnPoint>();
     [SerializeField] private HandMovementController handController;
+    [SerializeField] private MainGameController gameController;
     [SerializeField] private GameObject breadPrefab;
     [SerializeField] private Rigidbody freezerDoorRb;
     [SerializeField] private Rigidbody leftDoorRb;
@@ -126,6 +127,8 @@ public class MinigameFridgeController : MonoBehaviour
             spawnPoint.SpawnSpawnable();
         }
         fridgeLoaded = true;
+
+        gameController.MinigameLoaded = fridgeLoaded;
     }
 
     private IEnumerator DestroyRoutine()
