@@ -8,7 +8,7 @@ public class MainGameController : MonoBehaviour
 
     [SerializeField] private UIController uiControllerRef;
     [SerializeField] MinigameFridgeController minigame1Controller;
-    //[SerializeField] MinigameKnifeController minigame2Controller;
+    [SerializeField] MinigameKnifeController minigame2Controller;
     [SerializeField] MinigameToastController minigame3Controller;
     [SerializeField] private Camera cam;
 
@@ -49,7 +49,7 @@ public class MainGameController : MonoBehaviour
             case 0:
                 return "Open the fridge and find the bread";
             case 1:
-                return "x2";
+                return "Cut the bread in equal slices";
             case 2:
                 return "xx3";
             default:
@@ -70,11 +70,12 @@ public class MainGameController : MonoBehaviour
                 minigame1Controller.StartMinigame();
                 break;
             case 1:
-                Debug.Log("Run minigame 2");
+                minigame2Controller.StartMinigame();
                 break;
             default:
                 break;
         }
+        MinigameLoaded = false;
     }
 
     public void SetupNextMinigame()
@@ -88,6 +89,7 @@ public class MainGameController : MonoBehaviour
             case 1:
                 minigame1Controller.CloseMinigame();
                 Debug.Log("Setup minigame 2");
+                minigame2Controller.SetupMinigame();
                 MoveCamera(new Vector3(0, 0, 0f), new Quaternion(0, 0, 0, 0), true);
                 break;
             default:
