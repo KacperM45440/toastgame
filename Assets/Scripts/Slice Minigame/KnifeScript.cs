@@ -94,7 +94,8 @@ public class KnifeScript : MonoBehaviour
         while (verticalTime.Elapsed.TotalSeconds <= 2.1f)
         {
             float offset = Mathf.Abs(Mathf.Sin((float)(verticalTime.Elapsed.TotalSeconds * verticalMoveSpeed))) * verticalMaxDistance;
-            transform.position = new Vector3(transform.position.x, startPosition.y - offset, transform.position.z);
+            //transform.position = new Vector3(transform.position.x, startPosition.y - offset, transform.position.z);
+            GetComponent<Rigidbody>().position = new Vector3(transform.position.x, startPosition.y - offset, transform.position.z);
             yield return null;
         }
        
@@ -113,7 +114,8 @@ public class KnifeScript : MonoBehaviour
         while(true) //todo: change to while game not over
         {
             float offset = Mathf.Sin((float)(sideTime.Elapsed.TotalSeconds * sideMoveSpeed)) * sideMaxDistance;
-            transform.position = startPosition + new Vector3(offset, 0f, 0f);
+            //transform.position = startPosition + new Vector3(offset, 0f, 0f);
+            GetComponent<Rigidbody>().position = startPosition + new Vector3(offset, 0f, 0f);
             yield return null;
         }
     }
