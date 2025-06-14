@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Runtime.InteropServices;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class MainGameController : MonoBehaviour
@@ -11,6 +12,8 @@ public class MainGameController : MonoBehaviour
     [SerializeField] MinigameKnifeController minigame2Controller;
     [SerializeField] MinigameToastController minigame3Controller;
     [SerializeField] private Camera cam;
+    [SerializeField] private CinemachineCamera cCam;
+    [SerializeField] private CinemachineCamera[] listOfCameras;
 
     private int currentMinigame = 0;
 
@@ -67,10 +70,14 @@ public class MainGameController : MonoBehaviour
         switch (currentMinigame)
         {
             case 0:
+                ChangeOrtographicMode(true);
                 minigame1Controller.StartMinigame();
                 break;
             case 1:
                 minigame2Controller.StartMinigame();
+                break;
+            case 2:
+                //minigame3Controller.StartMinigame();
                 break;
             default:
                 break;
@@ -84,17 +91,40 @@ public class MainGameController : MonoBehaviour
         {
             case 0:
                 minigame1Controller.SetupMinigame();
-                MoveCamera(new Vector3(0, 5, -2.5f), new Quaternion(0, 0, 0, 0), false);
+                NextCamera();
+                //MoveCamera(new Vector3(0, 5, -2.5f), new Quaternion(0, 0, 0, 0), false);
                 break;
             case 1:
-                minigame1Controller.CloseMinigame();
+                ChangeOrtographicMode(false);
+                minigame1Controller.UnloadMinigame();
                 Debug.Log("Setup minigame 2");
                 minigame2Controller.SetupMinigame();
-                MoveCamera(new Vector3(0, 0, 0f), new Quaternion(0, 0, 0, 0), true);
+                NextCamera();
+                //MoveCamera(new Vector3(0, 0, 0f), new Quaternion(0, 0, 0, 0), true);
+                break;
+            case 2:
+                minigame2Controller.UnloadMinigame();
+                Debug.Log("Setup minigame 2");
+                //minigame3Controller.SetupMinigame();
+                NextCamera();
+                //MoveCamera(new Vector3(0, 0, 0f), new Quaternion(0, 0, 0, 0), true);
                 break;
             default:
                 break;
         }
+    }
+
+    private void NextCamera()
+    {
+        if (currentMinigame >= listOfCameras.Length)
+        {
+            Debug.LogWarning("No more cameras available for the current minigame.");
+            return;
+        }
+        cCam = listOfCameras[currentMinigame+1];
+        cCam.gameObject.SetActive(true);
+        cCam.Priority = currentMinigame + 1;
+        StartCoroutine(FakeWaitForCamera());
     }
 
     //for Debug until Cinematic camera is implemented
@@ -104,6 +134,13 @@ public class MainGameController : MonoBehaviour
         cam.transform.rotation = rotation;
         cam.orthographic = !perspective;
         StartCoroutine(FakeWaitForCamera());
+    }
+
+    private void ChangeOrtographicMode(bool ortographic)
+    {
+        cam = Camera.main;
+        cam.orthographic = ortographic;
+        //cam.fieldOfView = ortographic ? 60f : 45f;
     }
 
     private IEnumerator FakeWaitForCamera()

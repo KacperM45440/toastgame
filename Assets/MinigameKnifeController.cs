@@ -9,21 +9,23 @@ public class MinigameKnifeController : MonoBehaviour
     public void SetupMinigame()
     {
         //say minigame loaded
+        gameController.MinigameLoaded = true;
     }
 
     public void StartMinigame()
     {
-
+        StartCoroutine(FakeGameTimer());
     }
 
     public void FinishMinigame()
     {
-
+        scoreRef.AddScore(30);
+        gameController.FinishedMinigame();
     }
 
     public void UnloadMinigame()
     {
-
+        Debug.Log("Minigame Unloaded: Knife Cutting");
     }
 
     private IEnumerator FakeGameTimer()

@@ -53,10 +53,10 @@ public class HandMovementController : MonoBehaviour
         cursorRef = cursorObject.GetComponent<CursorPosition>();
     }
 
-    public void GainControl()
+    public void GainControl(bool control)
     {
-        inControl = true;
-        cursorRef.GainControl();
+        inControl = control;
+        cursorRef.GainControl(control);
     }
 
     public void FoundBread(GameObject bread)

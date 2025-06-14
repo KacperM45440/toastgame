@@ -26,9 +26,9 @@ public class CursorPosition : MonoBehaviour
         MoveHand();
     }
 
-    public void GainControl()
+    public void GainControl(bool control)
     {
-        inControl = true;
+        inControl = control;
     }
 
     private void InitializeReferences()

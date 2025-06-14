@@ -55,10 +55,10 @@ public class MinigameFridgeController : MonoBehaviour
         {
             return;
         }
-        ToggleCameraMode();//Remove after merging and incorporate into camera movement
+        //ToggleCameraMode();//Remove after merging and incorporate into camera movement
 
         gameStarted = true;
-        handController.GainControl();
+        handController.GainControl(true);
     }
 
     public void MinigameFinished(bool playerWon)
@@ -66,6 +66,7 @@ public class MinigameFridgeController : MonoBehaviour
         gameStarted = false;
         gameScore = (int)currentTime;
 
+        handController.GainControl(false);
         scoreRef.AddScore(gameScore);
         gameController.FinishedMinigame();
 
@@ -77,7 +78,7 @@ public class MinigameFridgeController : MonoBehaviour
         */
     }
 
-    public void CloseMinigame()
+    public void UnloadMinigame()
     {
         StartCoroutine(CloseFridge());
     }
