@@ -33,11 +33,11 @@ public class MainGameController : MonoBehaviour
         switch (currentMinigame)
         {
             case 0:
-                return "Fridge Finder";
+                return "The Fridge Finder";
             case 1:
-                return "Bread Cutter";
+                return "The Bread Cutter";
             case 2:
-                return "Toast Catcher";
+                return "The Toast Catcher";
             default:
                 return "Unknown";
         }
@@ -52,7 +52,7 @@ public class MainGameController : MonoBehaviour
             case 1:
                 return "Cut the bread in equal slices";
             case 2:
-                return "xx3";
+                return "Catch all falling toast";
             default:
                 return "Unknown";
         }

@@ -132,6 +132,7 @@ public class UIController : MonoBehaviour
 
     private IEnumerator UpdateScore()
     {
+        minigameScoreNameText.text = controllerRef.GetCurrentMinigameName();
         int currentUI = int.Parse(minigameScoreValueText.text);
         int targetScore = scoreRef.GetFinalScore();
 
@@ -154,19 +155,10 @@ public class UIController : MonoBehaviour
         }
         yield return new WaitForSeconds(2f);
 
-        /*
-        while (Vector3.Distance(minigameScoreValueText.transform.localScale, Vector3.one) > 0.1f)
-        {
-            Vector3.MoveTowards(minigameScoreValueText.transform.localScale, Vector3.one, 0.1f);
-            Vector3.MoveTowards(minigameScoreValueText.transform.rotation.eulerAngles, Vector3.zero, 1f);
-            yield return null;
-        }
-        */
-
         minigameScoreGO.SetActive(false);
         overlayGO.SetActive(false);
 
-        minigameScoreValueText.transform.localScale = Vector3.zero;
+        minigameScoreValueText.transform.localScale = Vector3.one;
         minigameScoreValueText.transform.rotation = Quaternion.Euler(0, 0, 0);
 
         controllerRef.SetupNextMinigame();
