@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: -6867524174320841699, guid: 9cd3a3e6fe7c71b4bbc03c2a4b5c9a99, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -183,12 +183,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainRb: {fileID: 6356314931600763357}
   springJoint: {fileID: 0}
-  isBread: 0
   boxMaterials:
-  - {fileID: 2100000, guid: fc15852a84945f24b97cabf0c99366c9, type: 2}
-  - {fileID: -6922793697723135513, guid: 28233b714169d574daed4d28e59eca73, type: 3}
-  - {fileID: 2100000, guid: 1a201393dedf1154eac012260de6d7a4, type: 2}
-  - {fileID: 2100000, guid: aba7d24d18839c645965a34c51d2106b, type: 2}
+  - {fileID: 7887957717227282328, guid: bb8681bc1877f1741afd732242c4b856, type: 3}
+  - {fileID: -6271897200390792742, guid: cdcc082bbb3b8664eb4b6c3d3f169398, type: 3}
+  - {fileID: 4821569825883369354, guid: 9cd3a3e6fe7c71b4bbc03c2a4b5c9a99, type: 3}
+  - {fileID: -3026631972412005785, guid: a4286fbda5bb08f4189bd97dadb2be20, type: 3}
   rendererRef: {fileID: 6549291263029709909}
 --- !u!1 &8935289067495682504
 GameObject:
