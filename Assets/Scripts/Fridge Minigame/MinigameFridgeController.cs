@@ -56,6 +56,7 @@ public class MinigameFridgeController : MonoBehaviour
         gameStarted = false;
         gameScore = (int)currentTime;
 
+        StartCoroutine(CloseFridge());
         handController.GainControl(false);
         scoreRef.AddScore(gameScore);
         gameController.FinishedMinigame();
@@ -63,7 +64,7 @@ public class MinigameFridgeController : MonoBehaviour
 
     public void UnloadMinigame()
     {
-        StartCoroutine(CloseFridge());
+        StartCoroutine(DestroyRoutine());
     }
 
     private void MinigameLoop()
@@ -85,13 +86,6 @@ public class MinigameFridgeController : MonoBehaviour
     private void SpawnFridgeContents()
     {
         StartCoroutine(SpawnRoutine());
-    }
-
-    private void ClearFridgeContents()
-    {
-        handController.GetCursor().SetActive(false);
-        handController.gameObject.SetActive(false);
-        StartCoroutine(DestroyRoutine());
     }
 
     private IEnumerator SpawnRoutine()
@@ -116,7 +110,11 @@ public class MinigameFridgeController : MonoBehaviour
 
     private IEnumerator DestroyRoutine()
     {
-        yield return null;
+        handController.GetCursor().SetActive(false);
+
+        yield return new WaitForSeconds(3f);
+        handController.gameObject.SetActive(false);
+
         foreach (SpawnPoint spawnPoint in spawnPoints)
         {
             Destroy(spawnPoint.gameObject);
@@ -125,6 +123,8 @@ public class MinigameFridgeController : MonoBehaviour
 
     private IEnumerator CloseFridge()
     {
+        yield return new WaitForSeconds(3f);
+
         float doorPower = 5f;
         leftDoorRb.AddForce(new Vector3(-3, 0, -1) * doorPower, ForceMode.Impulse);
         yield return new WaitForSeconds(0.3f);
@@ -134,7 +134,5 @@ public class MinigameFridgeController : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         rightDoorRb.AddForce(new Vector3(-5, 0, 1) * doorPower, ForceMode.Impulse);
         yield return new WaitForSeconds(3f);
-
-        ClearFridgeContents();
     }
 }

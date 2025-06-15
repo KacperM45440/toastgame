@@ -8,12 +8,10 @@ public class MainGameController : MonoBehaviour
     [HideInInspector] public bool MinigameLoaded { get; set; }
 
     [SerializeField] private UIController uiControllerRef;
+    [SerializeField] private CameraController cameraControllerRef;
     [SerializeField] MinigameFridgeController minigame1Controller;
     [SerializeField] MinigameKnifeController minigame2Controller;
     [SerializeField] MinigameToastController minigame3Controller;
-    [SerializeField] private Camera cam;
-    [SerializeField] private CinemachineCamera cCam;
-    [SerializeField] private CinemachineCamera[] listOfCameras;
 
     private int currentMinigame = 0;
 
@@ -70,7 +68,7 @@ public class MainGameController : MonoBehaviour
         switch (currentMinigame)
         {
             case 0:
-                ChangeOrtographicMode(true);
+                cameraControllerRef.ChangeOrtographicMode(true);
                 minigame1Controller.StartMinigame();
                 break;
             case 1:
@@ -91,49 +89,31 @@ public class MainGameController : MonoBehaviour
         {
             case 0:
                 minigame1Controller.SetupMinigame();
-                NextCameraSpot();
+                cameraControllerRef.NextCameraSpot(currentMinigame);
+                cameraControllerRef.OpenTheDoor();
+                StartCoroutine(WaitThenShowInstructions(2));
                 break;
             case 1:
-                ChangeOrtographicMode(false);
+                cameraControllerRef.ChangeOrtographicMode(false);
                 minigame1Controller.UnloadMinigame();
-                Debug.Log("Setup minigame 2");
                 minigame2Controller.SetupMinigame();
-                NextCameraSpot();
+                cameraControllerRef.NextCameraSpot(currentMinigame);
+                StartCoroutine(WaitThenShowInstructions(2));
                 break;
             case 2:
                 minigame2Controller.UnloadMinigame();
-                Debug.Log("Setup minigame 2");
                 //minigame3Controller.SetupMinigame();
-                NextCameraSpot();
+                cameraControllerRef.NextCameraSpot(currentMinigame);
+                StartCoroutine(WaitThenShowInstructions(2));
                 break;
             default:
                 break;
         }
     }
 
-    private void NextCameraSpot()
+    private IEnumerator WaitThenShowInstructions(float waitTime)
     {
-        if (currentMinigame >= listOfCameras.Length)
-        {
-            Debug.LogWarning("No more cameras available for the current minigame.");
-            return;
-        }
-        cCam = listOfCameras[currentMinigame+1];
-        cCam.gameObject.SetActive(true);
-        cCam.Priority = currentMinigame + 1;
-        StartCoroutine(FakeWaitForCamera());
-    }
-
-    private void ChangeOrtographicMode(bool ortographic)
-    {
-        cam = Camera.main;
-        cam.orthographic = ortographic;
-    }
-
-    private IEnumerator FakeWaitForCamera()
-    {
-        yield return new WaitForSeconds(2f);
-
+        yield return new WaitForSeconds(waitTime);
         uiControllerRef.ShowMinigameInstructionsMenu();
     }
 }

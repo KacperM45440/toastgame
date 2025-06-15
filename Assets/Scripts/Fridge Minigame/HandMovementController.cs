@@ -55,6 +55,10 @@ public class HandMovementController : MonoBehaviour
 
     public void GainControl(bool control)
     {
+        if (control)
+        {
+            handModel.SetActive(true);
+        }
         inControl = control;
         cursorRef.GainControl(control);
     }
@@ -121,7 +125,7 @@ public class HandMovementController : MonoBehaviour
         );
         handRigidbody.mass = 0;
         handRigidbody.isKinematic = true;
-        cursorRef.PlayParticles(true);
+        //cursorRef.PlayParticles(true);
     }
 
     private void DropObject()
@@ -133,6 +137,6 @@ public class HandMovementController : MonoBehaviour
         handRigidbody.isKinematic = false;
         transform.SetPositionAndRotation(transform.position + new Vector3(0, 0, startPos.z), startRot);
         transform.localScale = startScale;
-        cursorRef.PlayParticles(false);
+        //cursorRef.PlayParticles(false);
     }
 }
