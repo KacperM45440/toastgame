@@ -20,19 +20,10 @@ public class MinigameFridgeController : MonoBehaviour
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private float targetTime = 30f;
 
-    private Camera cam;
     private float currentTime = 0;
     private int gameScore = 0;
     private bool gameStarted = false;
     private bool fridgeLoaded = false;
-    private bool isOrthographic = false;
-
-    private void Start()
-    {
-        //Todo: remove all below lines on scene merge
-        cam = Camera.main;
-        //SetupMinigame();
-    }
 
     private void Update()
     {
@@ -55,7 +46,6 @@ public class MinigameFridgeController : MonoBehaviour
         {
             return;
         }
-        //ToggleCameraMode();//Remove after merging and incorporate into camera movement
 
         gameStarted = true;
         handController.GainControl(true);
@@ -69,25 +59,11 @@ public class MinigameFridgeController : MonoBehaviour
         handController.GainControl(false);
         scoreRef.AddScore(gameScore);
         gameController.FinishedMinigame();
-
-        //do usuniêcia
-        /*
-        scoreText.text = gameScore.ToString();
-        scoreText.gameObject.SetActive(true);
-        endButton.gameObject.SetActive(true);
-        */
     }
 
     public void UnloadMinigame()
     {
         StartCoroutine(CloseFridge());
-    }
-
-    public void ToggleCameraMode()
-    {
-        //Œciemnij ekran
-        isOrthographic = !isOrthographic;
-        cam.orthographic = isOrthographic;
     }
 
     private void MinigameLoop()
@@ -150,7 +126,6 @@ public class MinigameFridgeController : MonoBehaviour
     private IEnumerator CloseFridge()
     {
         float doorPower = 5f;
-        //yield return new WaitForSeconds(0.5f);
         leftDoorRb.AddForce(new Vector3(-3, 0, -1) * doorPower, ForceMode.Impulse);
         yield return new WaitForSeconds(0.3f);
         freezerDoorRb.AddForce(new Vector3(-3, 0, 1) * doorPower, ForceMode.Impulse);
@@ -160,7 +135,6 @@ public class MinigameFridgeController : MonoBehaviour
         rightDoorRb.AddForce(new Vector3(-5, 0, 1) * doorPower, ForceMode.Impulse);
         yield return new WaitForSeconds(3f);
 
-        //camera can now fly away or scenes can change
         ClearFridgeContents();
     }
 }

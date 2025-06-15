@@ -91,30 +91,27 @@ public class MainGameController : MonoBehaviour
         {
             case 0:
                 minigame1Controller.SetupMinigame();
-                NextCamera();
-                //MoveCamera(new Vector3(0, 5, -2.5f), new Quaternion(0, 0, 0, 0), false);
+                NextCameraSpot();
                 break;
             case 1:
                 ChangeOrtographicMode(false);
                 minigame1Controller.UnloadMinigame();
                 Debug.Log("Setup minigame 2");
                 minigame2Controller.SetupMinigame();
-                NextCamera();
-                //MoveCamera(new Vector3(0, 0, 0f), new Quaternion(0, 0, 0, 0), true);
+                NextCameraSpot();
                 break;
             case 2:
                 minigame2Controller.UnloadMinigame();
                 Debug.Log("Setup minigame 2");
                 //minigame3Controller.SetupMinigame();
-                NextCamera();
-                //MoveCamera(new Vector3(0, 0, 0f), new Quaternion(0, 0, 0, 0), true);
+                NextCameraSpot();
                 break;
             default:
                 break;
         }
     }
 
-    private void NextCamera()
+    private void NextCameraSpot()
     {
         if (currentMinigame >= listOfCameras.Length)
         {
@@ -127,20 +124,10 @@ public class MainGameController : MonoBehaviour
         StartCoroutine(FakeWaitForCamera());
     }
 
-    //for Debug until Cinematic camera is implemented
-    private void MoveCamera(Vector3 position, Quaternion rotation, bool perspective)
-    {
-        cam.transform.position = position;
-        cam.transform.rotation = rotation;
-        cam.orthographic = !perspective;
-        StartCoroutine(FakeWaitForCamera());
-    }
-
     private void ChangeOrtographicMode(bool ortographic)
     {
         cam = Camera.main;
         cam.orthographic = ortographic;
-        //cam.fieldOfView = ortographic ? 60f : 45f;
     }
 
     private IEnumerator FakeWaitForCamera()
