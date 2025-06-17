@@ -14,6 +14,7 @@ public class HandMovementController : MonoBehaviour
     private Vector3 startPos;
     private Vector3 startScale;
     private Quaternion startRot;
+    private Transform parentRef;
     private bool inControl = false;
     private bool holdingBread = false;
 
@@ -44,6 +45,7 @@ public class HandMovementController : MonoBehaviour
             mainCamera = Camera.main;
         }
 
+        parentRef = transform.parent;
         startPos = transform.position;
         startRot = transform.rotation;
         startScale = transform.lossyScale;
@@ -51,9 +53,14 @@ public class HandMovementController : MonoBehaviour
         cursorRef = cursorObject.GetComponent<CursorPosition>();
     }
 
-    public void GainControl()
+    public void GainControl(bool control)
     {
-        inControl = true;
+        if (control)
+        {
+            handModel.SetActive(true);
+        }
+        inControl = control;
+        cursorRef.GainControl(control);
     }
 
     public void FoundBread(GameObject bread)
@@ -118,18 +125,18 @@ public class HandMovementController : MonoBehaviour
         );
         handRigidbody.mass = 0;
         handRigidbody.isKinematic = true;
-        cursorRef.PlayParticles(true);
+        //cursorRef.PlayParticles(true);
     }
 
     private void DropObject()
     {
         heldGrabbable.Dropped();
         heldGrabbable = null;
-        transform.parent = null;
+        transform.parent = parentRef;
         handRigidbody.mass = 1;
         handRigidbody.isKinematic = false;
         transform.SetPositionAndRotation(transform.position + new Vector3(0, 0, startPos.z), startRot);
         transform.localScale = startScale;
-        cursorRef.PlayParticles(false);
+        //cursorRef.PlayParticles(false);
     }
 }

@@ -97,7 +97,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainRb: {fileID: 7095648282229915946}
   springJoint: {fileID: 0}
-  isBread: 0
 --- !u!1 &7956412910692744442
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,7 +161,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1269498097086227339, guid: c12da6f478b86354c8c7ea248b8ece64, type: 3}
+  - {fileID: -6271897200390792742, guid: bffc721966ebe1a47bf7dc1492d82cf9, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

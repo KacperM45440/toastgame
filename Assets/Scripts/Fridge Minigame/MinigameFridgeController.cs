@@ -9,6 +9,8 @@ public class MinigameFridgeController : MonoBehaviour
 {
     [SerializeField] private List<SpawnPoint> spawnPoints = new List<SpawnPoint>();
     [SerializeField] private HandMovementController handController;
+    [SerializeField] private MainGameController gameController;
+    [SerializeField] private PlayerScore scoreRef;
     [SerializeField] private GameObject breadPrefab;
     [SerializeField] private Rigidbody freezerDoorRb;
     [SerializeField] private Rigidbody leftDoorRb;
@@ -18,18 +20,10 @@ public class MinigameFridgeController : MonoBehaviour
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private float targetTime = 30f;
 
-    private Camera cam;
     private float currentTime = 0;
+    private int gameScore = 0;
     private bool gameStarted = false;
     private bool fridgeLoaded = false;
-    private bool isOrthographic = false;
-
-    private void Start()
-    {
-        //Todo: remove all below lines on scene merge
-        cam = Camera.main;
-        SetupMinigame();
-    }
 
     private void Update()
     {
@@ -39,7 +33,9 @@ public class MinigameFridgeController : MonoBehaviour
     //Load required assets, spawn fridge contents, show UI elements etc.
     public void SetupMinigame()
     {
-        currentTime = targetTime;
+        currentTime = targetTime + 1;
+        handController.gameObject.SetActive(true);
+        handController.GetCursor().SetActive(true);
         SpawnFridgeContents();
     }
 
@@ -50,38 +46,25 @@ public class MinigameFridgeController : MonoBehaviour
         {
             return;
         }
-        ToggleCameraMode();//Remove after merging and incorporate into camera movement
 
         gameStarted = true;
-        handController.GainControl();
+        handController.GainControl(true);
     }
 
     public void MinigameFinished(bool playerWon)
     {
         gameStarted = false;
+        gameScore = (int)currentTime;
 
-        string endMessage = "You won!";
-        if (!playerWon)
-        {
-            endMessage = "You lost!";
-        }
-        endMessage += "\n" + (int)currentTime;
-
-        scoreText.text = endMessage;
-        scoreText.gameObject.SetActive(true);
-        endButton.gameObject.SetActive(true);
-    }
-
-    public void CloseMinigame()
-    {
         StartCoroutine(CloseFridge());
+        handController.GainControl(false);
+        scoreRef.AddScore(gameScore);
+        gameController.FinishedMinigame();
     }
 
-    public void ToggleCameraMode()
+    public void UnloadMinigame()
     {
-        //Œciemnij ekran
-        isOrthographic = !isOrthographic;
-        cam.orthographic = isOrthographic;
+        StartCoroutine(DestroyRoutine());
     }
 
     private void MinigameLoop()
@@ -105,11 +88,6 @@ public class MinigameFridgeController : MonoBehaviour
         StartCoroutine(SpawnRoutine());
     }
 
-    private void ClearFridgeContents()
-    {
-        StartCoroutine(DestroyRoutine());
-    }
-
     private IEnumerator SpawnRoutine()
     {
         yield return null;
@@ -126,11 +104,17 @@ public class MinigameFridgeController : MonoBehaviour
             spawnPoint.SpawnSpawnable();
         }
         fridgeLoaded = true;
+
+        gameController.MinigameLoaded = fridgeLoaded;
     }
 
     private IEnumerator DestroyRoutine()
     {
-        yield return null;
+        handController.GetCursor().SetActive(false);
+
+        yield return new WaitForSeconds(3f);
+        handController.gameObject.SetActive(false);
+
         foreach (SpawnPoint spawnPoint in spawnPoints)
         {
             Destroy(spawnPoint.gameObject);
@@ -139,8 +123,9 @@ public class MinigameFridgeController : MonoBehaviour
 
     private IEnumerator CloseFridge()
     {
+        yield return new WaitForSeconds(3f);
+
         float doorPower = 5f;
-        yield return new WaitForSeconds(0.5f);
         leftDoorRb.AddForce(new Vector3(-3, 0, -1) * doorPower, ForceMode.Impulse);
         yield return new WaitForSeconds(0.3f);
         freezerDoorRb.AddForce(new Vector3(-3, 0, 1) * doorPower, ForceMode.Impulse);
@@ -149,8 +134,5 @@ public class MinigameFridgeController : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         rightDoorRb.AddForce(new Vector3(-5, 0, 1) * doorPower, ForceMode.Impulse);
         yield return new WaitForSeconds(3f);
-
-        //camera can now fly away or scenes can change
-        ClearFridgeContents();
     }
 }

@@ -9,6 +9,7 @@ public class CursorPosition : MonoBehaviour
 
     private Vector2 cursorPosition;
     private Vector3 startPos;
+    private bool inControl = false;
 
     private void Start()
     {
@@ -17,7 +18,17 @@ public class CursorPosition : MonoBehaviour
 
     private void Update()
     {
+        if (!inControl)
+        {
+            return;
+        }
+
         MoveHand();
+    }
+
+    public void GainControl(bool control)
+    {
+        inControl = control;
     }
 
     private void InitializeReferences()

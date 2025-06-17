@@ -81,7 +81,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.54, y: 0.86, z: 1}
+  m_Size: {x: 1.54, y: 0.85, z: 1}
   m_Center: {x: 0, y: 0.35, z: 0}
 --- !u!114 &7764858152240891467
 MonoBehaviour:
@@ -97,7 +97,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainRb: {fileID: 3683908580308603299}
   springJoint: {fileID: 0}
-  isBread: 0
 --- !u!1 &7755956089690624400
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,7 +161,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -165202425182860983, guid: 074d64c87b3f71342904625d8d6ccf4d, type: 3}
+  - {fileID: -5173966397720942367, guid: b16f9c2067c583d438e164e5ba7b04ca, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -249,7 +248,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7229205855960353692, guid: 074d64c87b3f71342904625d8d6ccf4d, type: 3}
+  - {fileID: -407617382302988920, guid: 43102a4922216d54ba13eb3d802143e7, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

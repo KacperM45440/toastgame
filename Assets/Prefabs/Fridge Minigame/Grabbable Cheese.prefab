@@ -97,7 +97,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainRb: {fileID: 3555512455161708581}
   springJoint: {fileID: 0}
-  isBread: 0
   maxScale: 1.1
   minScale: 0.7
 --- !u!1 &7278595253334006956
@@ -164,7 +163,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3522955778539423533, guid: f23543dd74d8a6f419e42e597419492e, type: 3}
+  - {fileID: -2138252962470926213, guid: 42f810e5f338c014bab660acce5b36cd, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

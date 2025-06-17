@@ -184,7 +184,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainRb: {fileID: 8050660167339950210}
   springJoint: {fileID: 0}
-  isBread: 0
 --- !u!64 &2897048235499990674
 MeshCollider:
   m_ObjectHideFlags: 0
