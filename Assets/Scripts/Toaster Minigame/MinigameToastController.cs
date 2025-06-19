@@ -8,6 +8,7 @@ using UnityEngine;
 // It's also easier to do in a scenario where we're doing everything on a single Unity scene
 public class MinigameToastController : MonoBehaviour
 {
+    [SerializeField] private MainGameController gameController;
     [SerializeField] private UIController uiControllerRef;
     [SerializeField] private PlayerScore scoreRef;
     [SerializeField] private PlayerMovement movementRef;
@@ -16,17 +17,30 @@ public class MinigameToastController : MonoBehaviour
     [SerializeField] private TMP_Text timerText;
     [SerializeField] private TMP_Text scoreText;
     private bool gameStarted = false;
+    private float currentTime = 0f;
 
-    private void Awake()
+    public void SetupMinigame()
     {
-        Application.targetFrameRate = 100;
+        //put loading asynchronously here
+        gameStarted = false;
+        currentTime = targetTime;
+        scoreRef.ResetMinigameScore();
+        movementRef.ResetPlayerPosition();
+        toasterRef.ResetScene();
+
+        gameController.MinigameLoaded = true;
     }
 
-    public void GameStart()
+    public void StartMinigame()
     {
-        GameReset();
         gameStarted = true;
         StartCoroutine(GameStartRoutine());
+    }
+
+    public void UnloadMinigame()
+    {
+        //put unloading asynchronously here
+        Debug.Log("Minigame Unloaded: Knife Cutting");
     }
 
     private void Update()
@@ -43,17 +57,17 @@ public class MinigameToastController : MonoBehaviour
         }
 
         // 1. That the UI is constantly being updated
-        targetTime -= Time.deltaTime;
+        currentTime -= Time.deltaTime;
         UpdateUI();
 
         // 2. That toasts are being spawned, and two spawn processes aren't running at the same time (which would result in too many toasts)
-        if (((int)targetTime % 10 == 0) && toasterRef.IsToastRoutineNull())
+        if (((int)currentTime % 10 == 0) && toasterRef.IsToastRoutineNull())
         {
             ManageToaster();
         }
 
         // 3. That when the player runs out of time, the game finishes.
-        if (targetTime <= 0.0f)
+        if (currentTime <= 0.0f)
         {
             GameFinished();
         }
@@ -71,7 +85,7 @@ public class MinigameToastController : MonoBehaviour
             // Ex: if you've played for 20 seconds, the timer's value would stand at 79 seconds
             // and this prompts the for loop to begin spawning amount of toasts applicable for the 80 second block passed.
             // In this case, it'd be i = 8 * 10 (80>=79), so (10-8)*2+1 = 5 toasts spawned for the next 10 second block.
-            if (i * 10 >= targetTime)
+            if (i * 10 >= currentTime)
             {
                 toastAmount = (10 - i) * 2 + 1;
                 toasterRef.PopToasts(toastAmount, 10f);
@@ -88,7 +102,7 @@ public class MinigameToastController : MonoBehaviour
     // Update the minigame UI to display current time left and the player's score.
     private void UpdateUI()
     {
-        int time = ((int)targetTime);
+        int time = ((int)currentTime);
 
         if (time >= 0)
         {
@@ -106,9 +120,11 @@ public class MinigameToastController : MonoBehaviour
     private void GameFinished()
     {
         gameStarted = false;
-        uiControllerRef.FinishedGame();
+        scoreRef.AddScore(30); //add score variable
+        gameController.FinishedMinigame();
     }
 
+    /*
     // Clean up the state of the game.
     // Resetting all positions and variables manually means that we don't have to reload the scene.
     // By such, we're drastically lowering reloading times, skipping visual stutters (caused by recalculating)
@@ -121,6 +137,7 @@ public class MinigameToastController : MonoBehaviour
         movementRef.ResetPlayerPosition();
         toasterRef.ResetScene();
     }
+    */
 
     // Wait a frame to allow the rest of the minigame states to buffer, and then begin spawning toast
     private IEnumerator GameStartRoutine()

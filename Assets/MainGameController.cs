@@ -13,7 +13,12 @@ public class MainGameController : MonoBehaviour
     [SerializeField] MinigameKnifeController minigame2Controller;
     [SerializeField] MinigameToastController minigame3Controller;
 
-    private int currentMinigame = 0;
+    [SerializeField] [Range(0,2)] private int currentMinigame = 0;
+
+    private void Awake()
+    {
+        Application.targetFrameRate = 60;
+    }
 
     //Activated with menu UI button
     //Activates setup of 1st minigame and starts camera movement
@@ -75,7 +80,7 @@ public class MainGameController : MonoBehaviour
                 minigame2Controller.StartMinigame();
                 break;
             case 2:
-                //minigame3Controller.StartMinigame();
+                minigame3Controller.StartMinigame();
                 break;
             default:
                 break;
@@ -102,7 +107,7 @@ public class MainGameController : MonoBehaviour
                 break;
             case 2:
                 minigame2Controller.UnloadMinigame();
-                //minigame3Controller.SetupMinigame();
+                minigame3Controller.SetupMinigame();
                 cameraControllerRef.NextCameraSpot(currentMinigame);
                 StartCoroutine(WaitThenShowInstructions(2));
                 break;

@@ -1198,23 +1198,23 @@ MonoBehaviour:
           z: -0.000025238298
           w: 0.78067243
     - Position:
-        x: -15.024
-        y: 10.19
-        z: -13.916
+        x: -13.949
+        y: 9.932
+        z: -13.4
       TangentIn:
         x: 0
         y: 0
-        z: -2.102618
+        z: -3.8665228
       TangentOut:
         x: 0
         y: 0
-        z: 2.102618
+        z: 3.8665228
       Rotation:
         value:
           x: 0
-          y: 0.4955352
+          y: 0.9553921
           z: 0
-          w: 0.8685878
+          w: -0.2953404
     m_MetaData:
     - Mode: 2
       Tension: 0.5
@@ -2597,6 +2597,7 @@ MonoBehaviour:
   minigame1Controller: {fileID: 820039365}
   minigame2Controller: {fileID: 2131498101}
   minigame3Controller: {fileID: 6210436187785327569}
+  currentMinigame: 2
 --- !u!114 &869928479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3160,7 +3161,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1063249812
 Transform:
   m_ObjectHideFlags: 0
@@ -6604,7 +6605,7 @@ PrefabInstance:
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: scoreRef
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 869928479}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
@@ -7167,7 +7168,7 @@ PrefabInstance:
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: scoreRef
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 869928479}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
@@ -8178,7 +8179,7 @@ PrefabInstance:
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: scoreRef
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 869928479}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
@@ -8278,7 +8279,7 @@ PrefabInstance:
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: scoreRef
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 869928479}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
@@ -10283,7 +10284,7 @@ PrefabInstance:
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: scoreRef
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 869928479}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
@@ -10434,7 +10435,7 @@ PrefabInstance:
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: scoreRef
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 869928479}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
@@ -11913,7 +11914,7 @@ PrefabInstance:
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: scoreRef
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 869928479}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
@@ -12745,7 +12746,7 @@ PrefabInstance:
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: scoreRef
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 869928479}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
@@ -14058,7 +14059,7 @@ PrefabInstance:
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: scoreRef
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 869928479}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
@@ -15147,7 +15148,7 @@ PrefabInstance:
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: scoreRef
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 869928479}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
@@ -15979,7 +15980,7 @@ PrefabInstance:
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: scoreRef
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 869928479}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
@@ -16608,7 +16609,7 @@ PrefabInstance:
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: scoreRef
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 869928479}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
@@ -16682,7 +16683,7 @@ PrefabInstance:
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: scoreRef
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 869928479}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
@@ -17373,11 +17374,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b13e5a5ed8c13274484a455f7ee2a162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameController: {fileID: 869928478}
   uiControllerRef: {fileID: 638973011973590451}
   scoreRef: {fileID: 869928479}
   movementRef: {fileID: 6179656381061432531}
   toasterRef: {fileID: 358642810866939793}
-  targetTime: 100
+  targetTime: 30
   timerText: {fileID: 8737049054701911884}
   scoreText: {fileID: 7742778267692060752}
 --- !u!222 &6219181751167158966
@@ -19063,7 +19065,7 @@ PrefabInstance:
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: scoreRef
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 869928479}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
@@ -19875,7 +19877,7 @@ PrefabInstance:
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: scoreRef
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 869928479}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
@@ -20191,7 +20193,7 @@ PrefabInstance:
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: scoreRef
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 869928479}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
@@ -20967,7 +20969,7 @@ PrefabInstance:
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: scoreRef
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 869928479}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
@@ -21186,7 +21188,7 @@ PrefabInstance:
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: scoreRef
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 869928479}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
@@ -21870,7 +21872,7 @@ PrefabInstance:
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: scoreRef
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 869928479}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
@@ -23106,7 +23108,7 @@ PrefabInstance:
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: scoreRef
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 869928479}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
