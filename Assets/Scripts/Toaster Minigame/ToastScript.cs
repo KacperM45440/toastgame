@@ -4,7 +4,7 @@ using UnityEngine;
 public class ToastScript : MonoBehaviour
 {
     [SerializeField] private Rigidbody bodyRef;
-    [SerializeField] private PlayerScore scoreRef;
+    [SerializeField] private MinigameToastController controllerRef;
     [SerializeField] private Collider plateCollider;
     [SerializeField] private Collider groundCollider;
     [SerializeField] private MeshRenderer meshReference;
@@ -71,7 +71,7 @@ public class ToastScript : MonoBehaviour
     // Add score based on toast type (can be negative)
     private void ToastCollected()
     {
-        scoreRef.AddScore(scoreToAdd);
+        controllerRef.GrabbedToast(scoreToAdd);
         ResetToast();
     }
 

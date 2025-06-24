@@ -255,6 +255,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 18926701}
   m_CullTransparentMesh: 1
+--- !u!95 &23655820 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7924161703837000818, guid: e7f29d9a6a0dc244996f621d806d37e3, type: 3}
+  m_PrefabInstance: {fileID: 6179656381061432529}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &28446863
 GameObject:
   m_ObjectHideFlags: 0
@@ -2597,7 +2602,7 @@ MonoBehaviour:
   minigame1Controller: {fileID: 820039365}
   minigame2Controller: {fileID: 2131498101}
   minigame3Controller: {fileID: 6210436187785327569}
-  currentMinigame: 2
+  currentMinigame: 1
 --- !u!114 &869928479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6607,6 +6612,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 869928479}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
+      propertyPath: controllerRef
+      value: 
+      objectReference: {fileID: 6210436187785327569}
+    - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
       objectReference: {fileID: 6179656381061432530}
@@ -7169,6 +7178,10 @@ PrefabInstance:
       propertyPath: scoreRef
       value: 
       objectReference: {fileID: 869928479}
+    - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
+      propertyPath: controllerRef
+      value: 
+      objectReference: {fileID: 6210436187785327569}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
@@ -7842,7 +7855,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!33 &1092536865511212855
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -8181,6 +8194,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 869928479}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
+      propertyPath: controllerRef
+      value: 
+      objectReference: {fileID: 6210436187785327569}
+    - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
       objectReference: {fileID: 6179656381061432530}
@@ -8280,6 +8297,10 @@ PrefabInstance:
       propertyPath: scoreRef
       value: 
       objectReference: {fileID: 869928479}
+    - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
+      propertyPath: controllerRef
+      value: 
+      objectReference: {fileID: 6210436187785327569}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
@@ -10286,6 +10307,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 869928479}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
+      propertyPath: controllerRef
+      value: 
+      objectReference: {fileID: 6210436187785327569}
+    - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
       objectReference: {fileID: 6179656381061432530}
@@ -10436,6 +10461,10 @@ PrefabInstance:
       propertyPath: scoreRef
       value: 
       objectReference: {fileID: 869928479}
+    - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
+      propertyPath: controllerRef
+      value: 
+      objectReference: {fileID: 6210436187785327569}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
@@ -11916,6 +11945,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 869928479}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
+      propertyPath: controllerRef
+      value: 
+      objectReference: {fileID: 6210436187785327569}
+    - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
       objectReference: {fileID: 6179656381061432530}
@@ -12748,6 +12781,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 869928479}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
+      propertyPath: controllerRef
+      value: 
+      objectReference: {fileID: 6210436187785327569}
+    - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
       objectReference: {fileID: 6179656381061432530}
@@ -12826,7 +12863,7 @@ GameObject:
   - component: {fileID: 6497510983677760060}
   - component: {fileID: 6210436187785327569}
   m_Layer: 0
-  m_Name: Game Controller
+  m_Name: Toaster Minigame Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14061,6 +14098,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 869928479}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
+      propertyPath: controllerRef
+      value: 
+      objectReference: {fileID: 6210436187785327569}
+    - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
       objectReference: {fileID: 6179656381061432530}
@@ -15150,6 +15191,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 869928479}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
+      propertyPath: controllerRef
+      value: 
+      objectReference: {fileID: 6210436187785327569}
+    - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
       objectReference: {fileID: 6179656381061432530}
@@ -15982,6 +16027,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 869928479}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
+      propertyPath: controllerRef
+      value: 
+      objectReference: {fileID: 6210436187785327569}
+    - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
       objectReference: {fileID: 6179656381061432530}
@@ -16611,6 +16660,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 869928479}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
+      propertyPath: controllerRef
+      value: 
+      objectReference: {fileID: 6210436187785327569}
+    - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
       objectReference: {fileID: 6179656381061432530}
@@ -16684,6 +16737,10 @@ PrefabInstance:
       propertyPath: scoreRef
       value: 
       objectReference: {fileID: 869928479}
+    - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
+      propertyPath: controllerRef
+      value: 
+      objectReference: {fileID: 6210436187785327569}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
@@ -17219,6 +17276,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1063249812}
     m_Modifications:
+    - target: {fileID: 17163353266268471, guid: e7f29d9a6a0dc244996f621d806d37e3, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3142981084730250739, guid: e7f29d9a6a0dc244996f621d806d37e3, type: 3}
       propertyPath: m_Constraints
       value: 116
@@ -17226,6 +17287,10 @@ PrefabInstance:
     - target: {fileID: 7846075051827468602, guid: e7f29d9a6a0dc244996f621d806d37e3, type: 3}
       propertyPath: m_Name
       value: --PLAYER--
+      objectReference: {fileID: 0}
+    - target: {fileID: 7846075051827468602, guid: e7f29d9a6a0dc244996f621d806d37e3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8671572083563398304, guid: e7f29d9a6a0dc244996f621d806d37e3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17268,8 +17333,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8798225055984391285, guid: e7f29d9a6a0dc244996f621d806d37e3, type: 3}
+      propertyPath: animatorRef
+      value: 
+      objectReference: {fileID: 23655820}
+    - target: {fileID: 8798225055984391285, guid: e7f29d9a6a0dc244996f621d806d37e3, type: 3}
       propertyPath: movementSpeed
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8798225055984391285, guid: e7f29d9a6a0dc244996f621d806d37e3, type: 3}
+      propertyPath: rotationSpeed
+      value: 600
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3763147070088175996, guid: e7f29d9a6a0dc244996f621d806d37e3, type: 3}
@@ -19067,6 +19140,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 869928479}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
+      propertyPath: controllerRef
+      value: 
+      objectReference: {fileID: 6210436187785327569}
+    - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
       objectReference: {fileID: 6179656381061432530}
@@ -19879,6 +19956,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 869928479}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
+      propertyPath: controllerRef
+      value: 
+      objectReference: {fileID: 6210436187785327569}
+    - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
       objectReference: {fileID: 6179656381061432530}
@@ -20194,6 +20275,10 @@ PrefabInstance:
       propertyPath: scoreRef
       value: 
       objectReference: {fileID: 869928479}
+    - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
+      propertyPath: controllerRef
+      value: 
+      objectReference: {fileID: 6210436187785327569}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
@@ -20971,6 +21056,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 869928479}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
+      propertyPath: controllerRef
+      value: 
+      objectReference: {fileID: 6210436187785327569}
+    - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
       objectReference: {fileID: 6179656381061432530}
@@ -21189,6 +21278,10 @@ PrefabInstance:
       propertyPath: scoreRef
       value: 
       objectReference: {fileID: 869928479}
+    - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
+      propertyPath: controllerRef
+      value: 
+      objectReference: {fileID: 6210436187785327569}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
@@ -21873,6 +21966,10 @@ PrefabInstance:
       propertyPath: scoreRef
       value: 
       objectReference: {fileID: 869928479}
+    - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
+      propertyPath: controllerRef
+      value: 
+      objectReference: {fileID: 6210436187785327569}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 
@@ -23109,6 +23206,10 @@ PrefabInstance:
       propertyPath: scoreRef
       value: 
       objectReference: {fileID: 869928479}
+    - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
+      propertyPath: controllerRef
+      value: 
+      objectReference: {fileID: 6210436187785327569}
     - target: {fileID: 3449893913186716246, guid: 1a2af36824da0974fb15126d3beed4da, type: 3}
       propertyPath: plateCollider
       value: 

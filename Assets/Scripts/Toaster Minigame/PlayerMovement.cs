@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
 // This class is responsible for moving the player in the toast falling minigame.
@@ -6,10 +8,53 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float movementSpeed = 30.0f;
     [SerializeField] private float rotationSpeed = 720.0f;
     [SerializeField] private Rigidbody bodyRef;
-    [SerializeField] private Vector3 movementVector;
+    [SerializeField] private Animator animatorRef;
+    [SerializeField] private List<GameObject> platedToasts = new List<GameObject>();
+
+    private int maxToastCount;
+    private int currentToastIndex = 0;
+    private Vector3 movementVector;
+    private bool isPlayable = false;
+
+    public void SetPlayable(bool playable)
+    {
+        isPlayable = playable;
+    }
+
+    public void GrabbedToast(int score)
+    {
+        currentToastIndex += score;
+        if (currentToastIndex < 0)
+        {
+            currentToastIndex = 0;
+        }
+
+        bool positive = false;
+        if (score > 0)
+        {
+            positive = true;
+        }
+
+        if (currentToastIndex >= maxToastCount)
+        {
+            return;
+        }
+
+        platedToasts[currentToastIndex - 1].SetActive(positive);
+    }
+
+    private void Start()
+    {
+        maxToastCount = platedToasts.Count;
+    }
 
     private void Update()
     {
+        if (!isPlayable)
+        {
+            return; 
+        }
+
         GetInput();
     }
 
@@ -38,6 +83,8 @@ public class PlayerMovement : MonoBehaviour
         bodyRef.linearVelocity = direction;
 
         transform.Rotate(0, movementVector.y * rotationSpeed * Time.fixedDeltaTime, 0);
+
+        animatorRef.speed = bodyRef.linearVelocity.magnitude / 5f;
     }
 
     public void ResetPlayerPosition()

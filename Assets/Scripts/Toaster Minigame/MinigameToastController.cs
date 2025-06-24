@@ -13,27 +13,27 @@ public class MinigameToastController : MonoBehaviour
     [SerializeField] private PlayerScore scoreRef;
     [SerializeField] private PlayerMovement movementRef;
     [SerializeField] private ToastSpawner toasterRef;
-    [SerializeField] private float targetTime = 100f;
+    [SerializeField] private float targetTime = 30;
     [SerializeField] private TMP_Text timerText;
     [SerializeField] private TMP_Text scoreText;
     private bool gameStarted = false;
     private float currentTime = 0f;
+    private int currentScore = 0;
 
     public void SetupMinigame()
     {
-        //put loading asynchronously here
         gameStarted = false;
         currentTime = targetTime;
         scoreRef.ResetMinigameScore();
         movementRef.ResetPlayerPosition();
         toasterRef.ResetScene();
-
-        gameController.MinigameLoaded = true;
+        StartCoroutine(LoadAssetsAsync());
     }
 
     public void StartMinigame()
     {
         gameStarted = true;
+        movementRef.SetPlayable(true);
         StartCoroutine(GameStartRoutine());
     }
 
@@ -41,6 +41,17 @@ public class MinigameToastController : MonoBehaviour
     {
         //put unloading asynchronously here
         Debug.Log("Minigame Unloaded: Knife Cutting");
+    }
+
+    public void GrabbedToast(int score)
+    {
+        currentScore += score;
+        if (currentScore < 0)
+        {
+            currentScore = 0;
+        }
+
+        movementRef.GrabbedToast(score);
     }
 
     private void Update()
@@ -120,7 +131,8 @@ public class MinigameToastController : MonoBehaviour
     private void GameFinished()
     {
         gameStarted = false;
-        scoreRef.AddScore(30); //add score variable
+        movementRef.SetPlayable(false);
+        scoreRef.AddScore(currentScore); //add score variable
         gameController.FinishedMinigame();
     }
 
@@ -140,6 +152,15 @@ public class MinigameToastController : MonoBehaviour
     */
 
     // Wait a frame to allow the rest of the minigame states to buffer, and then begin spawning toast
+    private IEnumerator LoadAssetsAsync()
+    {
+        yield return new WaitForSeconds(0.8f);
+        toasterRef.gameObject.SetActive(true);
+        movementRef.gameObject.SetActive(true);
+
+        gameController.MinigameLoaded = true;
+    }
+
     private IEnumerator GameStartRoutine()
     {
         yield return null;
