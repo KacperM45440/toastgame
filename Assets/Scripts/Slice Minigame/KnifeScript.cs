@@ -14,25 +14,42 @@ public class KnifeScript : MonoBehaviour
     [SerializeField] private float verticalMoveSpeed = 1.5f;      
     [SerializeField] private float verticalMaxDistance = 3f;
 
+    private bool playerInControl = false;
+    private bool slicing = false;
     private Stopwatch sideTime;
     private Stopwatch verticalTime;
     private Vector3 startPosition;
     private IEnumerator MoveRoutine = null;
 
+    public void StartMinigame()
+    {
+        StartMoving();
+        playerInControl = true;
+    }
+
+    public void StopMinigame()
+    {
+        StopAllMoving();
+        playerInControl = false;
+    }
+
     private void Start()
     {
         InitializeReferences();
-        StartMoving();
     }
 
     private void Update()
     {
+        if(!playerInControl)
+        {
+            return;
+        }
         HandleInput();
     }
 
     private void HandleInput()
     {
-        if (Input.GetMouseButtonDown(0)) // LMB
+        if (Input.GetMouseButtonDown(0) && !slicing) // LMB
         {
             StopAllMoving();
             StartSlicing();
@@ -79,7 +96,8 @@ public class KnifeScript : MonoBehaviour
             return;
         }
 
-        float score = Mathf.Abs(transform.position.x - outlineGO.transform.position.x); //todo: add score
+        slicing = true;
+        float score = Mathf.Abs(transform.position.z - outlineGO.transform.position.z); //todo: add score
         Debug.Log(score);
         HideOutline();
 
@@ -98,7 +116,8 @@ public class KnifeScript : MonoBehaviour
             GetComponent<Rigidbody>().position = new Vector3(transform.position.x, startPosition.y - offset, transform.position.z);
             yield return null;
         }
-       
+
+        slicing = false;
         StopAllMoving();
         StartMoving();
     }
@@ -115,7 +134,7 @@ public class KnifeScript : MonoBehaviour
         {
             float offset = Mathf.Sin((float)(sideTime.Elapsed.TotalSeconds * sideMoveSpeed)) * sideMaxDistance;
             //transform.position = startPosition + new Vector3(offset, 0f, 0f);
-            GetComponent<Rigidbody>().position = startPosition + new Vector3(offset, 0f, 0f);
+            GetComponent<Rigidbody>().position = startPosition + new Vector3(0f, 0f, offset);
             yield return null;
         }
     }

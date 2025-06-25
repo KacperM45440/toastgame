@@ -5,6 +5,9 @@ public class MinigameKnifeController : MonoBehaviour
 {
     [SerializeField] private MainGameController gameController;
     [SerializeField] private PlayerScore scoreRef;
+    [SerializeField] private KnifeScript knifeRef;
+
+    private int score = 0;
 
     public void SetupMinigame()
     {
@@ -14,11 +17,13 @@ public class MinigameKnifeController : MonoBehaviour
 
     public void StartMinigame()
     {
+        knifeRef.StartMinigame();
         StartCoroutine(FakeGameTimer());
     }
 
     public void FinishMinigame()
     {
+        knifeRef.StopMinigame();
         scoreRef.AddScore(30);
         gameController.FinishedMinigame();
     }
@@ -28,9 +33,14 @@ public class MinigameKnifeController : MonoBehaviour
         Debug.Log("Minigame Unloaded: Knife Cutting");
     }
 
+    public void GetPoints(int points)
+    {
+        score += points;
+    }
+
     private IEnumerator FakeGameTimer()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(5);
         FinishMinigame();
     }
 }

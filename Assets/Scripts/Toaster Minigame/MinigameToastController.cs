@@ -19,6 +19,7 @@ public class MinigameToastController : MonoBehaviour
     private bool gameStarted = false;
     private float currentTime = 0f;
     private int currentScore = 0;
+    private bool stopSpawning = false;
 
     public void SetupMinigame()
     {
@@ -77,7 +78,7 @@ public class MinigameToastController : MonoBehaviour
         //    //ManageToaster();
         //}
 
-        if (toasterRef.IsToastRoutineNull())
+        if (toasterRef.IsToastRoutineNull() && !stopSpawning)
         {
             ManageToasterLite();
         }
@@ -119,7 +120,13 @@ public class MinigameToastController : MonoBehaviour
     // 25.06.25 - Simplified mechanic
     private void ManageToasterLite()
     {
-        toasterRef.PopToasts(15, 10f);
+        float time = 10f;
+        if(currentTime <= 10f)
+        {
+            time = 7f;
+            stopSpawning = true;
+        }
+        toasterRef.PopToasts(15, time);
     }
 
     // Update the minigame UI to display current time left and the player's score.
