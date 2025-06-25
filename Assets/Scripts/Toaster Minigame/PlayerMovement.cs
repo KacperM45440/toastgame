@@ -50,11 +50,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (!isPlayable)
-        {
-            return; 
-        }
-
         GetInput();
     }
 
@@ -68,6 +63,12 @@ public class PlayerMovement : MonoBehaviour
     // we want to ensure the calls are being processed ASAP.
     private void GetInput()
     {
+        if (!isPlayable)
+        {
+            movementVector = Vector3.zero;
+            return;
+        }
+
         movementVector = new Vector3(0, Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
     }
 

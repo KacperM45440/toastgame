@@ -71,11 +71,17 @@ public class MinigameToastController : MonoBehaviour
         currentTime -= Time.deltaTime;
         UpdateUI();
 
-        // 2. That toasts are being spawned, and two spawn processes aren't running at the same time (which would result in too many toasts)
-        if (((int)currentTime % 10 == 0) && toasterRef.IsToastRoutineNull())
+        //// 2. That toasts are being spawned, and two spawn processes aren't running at the same time (which would result in too many toasts)
+        //if (((int)currentTime % 10 == 0) && toasterRef.IsToastRoutineNull())
+        //{
+        //    //ManageToaster();
+        //}
+
+        if (toasterRef.IsToastRoutineNull())
         {
-            ManageToaster();
+            ManageToasterLite();
         }
+        
 
         // 3. That when the player runs out of time, the game finishes.
         if (currentTime <= 0.0f)
@@ -108,6 +114,12 @@ public class MinigameToastController : MonoBehaviour
         // because the first 2 seconds are spent waiting for the game to commence.
         // Note that the above for loop won't work during this time, as it's max value is i = 9 (90 seconds).
         toasterRef.PopToasts(toastAmount, 8f);
+    }
+
+    // 25.06.25 - Simplified mechanic
+    private void ManageToasterLite()
+    {
+        toasterRef.PopToasts(15, 10f);
     }
 
     // Update the minigame UI to display current time left and the player's score.
@@ -164,6 +176,7 @@ public class MinigameToastController : MonoBehaviour
     private IEnumerator GameStartRoutine()
     {
         yield return null;
-        ManageToaster();
+        //ManageToaster();
+        ManageToasterLite();
     }
 }
