@@ -13,7 +13,6 @@ public class KnifeScript : MonoBehaviour
     [SerializeField] private float sideMaxDistance = 2f;    
     [SerializeField] private float verticalMoveSpeed = 1.5f;      
     [SerializeField] private float verticalMaxDistance = 3f;
-    [SerializeField] private bool debugStart = false;
 
     private bool playerInControl = false;
     private bool slicing = false;
@@ -37,11 +36,6 @@ public class KnifeScript : MonoBehaviour
     private void Start()
     {
         InitializeReferences();
-
-        if(debugStart)
-        {
-            StartMinigame();
-        }
     }
 
     private void Update()
@@ -131,9 +125,7 @@ public class KnifeScript : MonoBehaviour
     private IEnumerator SliceRoutine()
     {
         yield return new WaitForSeconds(0.7f);
-        Vector3 testVector = Vector3.right + new Vector3(0f, 0f, 1f);
-        Debug.Log(testVector);
-        mhCutter.Cut(breadGO, transform.position, testVector);
+        mhCutter.Cut(breadGO, transform.position, Vector3.right);
     }
 
     private IEnumerator MovingCoroutine()
@@ -142,7 +134,7 @@ public class KnifeScript : MonoBehaviour
         {
             float offset = Mathf.Sin((float)(sideTime.Elapsed.TotalSeconds * sideMoveSpeed)) * sideMaxDistance;
             //transform.position = startPosition + new Vector3(offset, 0f, 0f);
-            GetComponent<Rigidbody>().position = startPosition + new Vector3(offset, 0f, offset);
+            GetComponent<Rigidbody>().position = startPosition + new Vector3(offset, 0f, 0f);
             yield return null;
         }
     }

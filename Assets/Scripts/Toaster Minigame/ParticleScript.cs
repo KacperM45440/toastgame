@@ -12,7 +12,7 @@ public class ParticleScript : MonoBehaviour
     
     public void SpawnParticle(bool givenType, Vector3 givenPosition)
     {
-        Vector3 newPosition = new(givenPosition.x, 0.1f, givenPosition.z);
+        Vector3 newPosition = new(givenPosition.x, -4.4f, givenPosition.z);
         transform.position = newPosition;
         
         var col = lowerSystem.colorOverLifetime;

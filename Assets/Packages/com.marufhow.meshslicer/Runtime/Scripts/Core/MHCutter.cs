@@ -90,7 +90,7 @@ namespace com.marufhow.meshslicer.core
             
             _rightSlicedGameObject.transform.position = cutObject.transform.position + Vector3.right * 0.1f;
             _rightSlicedGameObject.transform.rotation = cutObject.transform.rotation;
-            _rightSlicedGameObject.transform.localScale = cutObject.transform.localScale;
+            _rightSlicedGameObject.transform.localScale = cutObject.transform.localScale * 0.5f;
             var rightRb = _rightSlicedGameObject.AddComponent<Rigidbody>();
             rightRb.AddForce( Vector3.right , ForceMode.Impulse);
         }

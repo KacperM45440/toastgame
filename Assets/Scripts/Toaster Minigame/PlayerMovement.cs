@@ -90,6 +90,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void ResetPlayerPosition()
     {
-        bodyRef.transform.SetPositionAndRotation(new Vector3(0, 0, 6), new Quaternion(0, 1, 0, 0));
+        bodyRef.transform.SetLocalPositionAndRotation(new Vector3(0, 0, 6f), new Quaternion(0, 1, 0, 0));
     }
 }
