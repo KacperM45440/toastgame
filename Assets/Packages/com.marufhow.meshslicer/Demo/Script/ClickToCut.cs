@@ -24,7 +24,7 @@ namespace com.marufhow.meshslicer.demo
                         ? Vector3.up
                         : Vector3.right;
 
-                    _mhCutter.Cut(hit.collider.gameObject, hit.point, cutDirection);
+                    _mhCutter.Cut(hit.collider.gameObject, hit.point, cutDirection, gameObject);
                 }
             }
         }

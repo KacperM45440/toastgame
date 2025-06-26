@@ -6,13 +6,14 @@ public class MinigameKnifeController : MonoBehaviour
     [SerializeField] private MainGameController gameController;
     [SerializeField] private PlayerScore scoreRef;
     [SerializeField] private KnifeScript knifeRef;
+    [SerializeField] private GameObject minigameComponents;
+    [SerializeField] private GameObject slicedOffParent;
 
     private int score = 0;
 
     public void SetupMinigame()
     {
-        //say minigame loaded
-        gameController.MinigameLoaded = true;
+        StartCoroutine(SetupAsync());
     }
 
     public void StartMinigame()
@@ -30,12 +31,27 @@ public class MinigameKnifeController : MonoBehaviour
 
     public void UnloadMinigame()
     {
-        Debug.Log("Minigame Unloaded: Knife Cutting");
+        StartCoroutine(UnloadAsync());
     }
 
     public void GetPoints(int points)
     {
         score += points;
+    }
+
+    private IEnumerator SetupAsync()
+    {
+        minigameComponents.gameObject.SetActive(true);
+
+        yield return null;
+        gameController.MinigameLoaded = true;
+    }
+
+    private IEnumerator UnloadAsync()
+    {
+        yield return new WaitForSeconds(1f);
+        slicedOffParent.gameObject.SetActive(false);
+        minigameComponents.gameObject.SetActive(false);
     }
 
     private IEnumerator FakeGameTimer()

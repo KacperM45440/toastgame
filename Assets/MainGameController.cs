@@ -103,13 +103,13 @@ public class MainGameController : MonoBehaviour
                 minigame1Controller.UnloadMinigame();
                 minigame2Controller.SetupMinigame();
                 cameraControllerRef.NextCameraSpot(currentMinigame);
-                StartCoroutine(WaitThenShowInstructions(2));
+                StartCoroutine(WaitThenShowInstructions(4));
                 break;
             case 2:
                 minigame2Controller.UnloadMinigame();
                 minigame3Controller.SetupMinigame();
                 cameraControllerRef.NextCameraSpot(currentMinigame);
-                StartCoroutine(WaitThenShowInstructions(2));
+                StartCoroutine(WaitThenShowInstructions(4));
                 break;
             default:
                 break;

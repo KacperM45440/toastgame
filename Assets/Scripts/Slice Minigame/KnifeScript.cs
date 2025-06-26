@@ -9,6 +9,7 @@ public class KnifeScript : MonoBehaviour
     [SerializeField] private MHCutter mhCutter;
     [SerializeField] private GameObject breadGO;
     [SerializeField] private GameObject outlineGO;
+    [SerializeField] private GameObject slicedOffParent;
     [SerializeField] private float sideMoveSpeed = 3f;      
     [SerializeField] private float sideMaxDistance = 2f;    
     [SerializeField] private float verticalMoveSpeed = 1.5f;      
@@ -125,7 +126,7 @@ public class KnifeScript : MonoBehaviour
     private IEnumerator SliceRoutine()
     {
         yield return new WaitForSeconds(0.7f);
-        mhCutter.Cut(breadGO, transform.position, Vector3.right);
+        mhCutter.Cut(breadGO, transform.position, Vector3.right, slicedOffParent);
     }
 
     private IEnumerator MovingCoroutine()

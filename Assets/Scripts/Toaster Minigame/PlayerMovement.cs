@@ -23,24 +23,20 @@ public class PlayerMovement : MonoBehaviour
 
     public void GrabbedToast(int score)
     {
-        currentToastIndex += score;
-        if (currentToastIndex < 0)
-        {
-            currentToastIndex = 0;
-        }
-
         bool positive = false;
         if (score > 0)
         {
             positive = true;
         }
 
-        if (currentToastIndex >= maxToastCount)
-        {
-            return;
-        }
+        platedToasts[currentToastIndex].SetActive(positive);
 
-        platedToasts[currentToastIndex - 1].SetActive(positive);
+        currentToastIndex += score;
+
+        if (currentToastIndex < 0 || currentToastIndex > maxToastCount)
+        {
+            currentToastIndex -= score;
+        }
     }
 
     private void Start()

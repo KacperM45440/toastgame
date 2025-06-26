@@ -33,12 +33,12 @@ public class CameraController : MonoBehaviour
     private IEnumerator OpenDoor()
     {
         yield return new WaitForSeconds(0.2f);
-        while (doorRef.rotation.y < 90)
+        while (!Mathf.Approximately(doorRef.localRotation.eulerAngles.y, 90))
         {
             doorRef.rotation = Quaternion.RotateTowards(doorRef.rotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * 90);
             yield return null;
         }
         yield return new WaitForSeconds(3);
-        doorRef.rotation = Quaternion.Euler(0, 0, 0);
+        doorRef.transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 }

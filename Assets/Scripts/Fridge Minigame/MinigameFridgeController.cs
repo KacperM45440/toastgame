@@ -112,7 +112,7 @@ public class MinigameFridgeController : MonoBehaviour
     {
         handController.GetCursor().SetActive(false);
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         handController.gameObject.SetActive(false);
 
         foreach (SpawnPoint spawnPoint in spawnPoints)
