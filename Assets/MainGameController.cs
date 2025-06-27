@@ -18,7 +18,7 @@ public class MainGameController : MonoBehaviour
 
     private void Awake()
     {
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = 100;
     }
 
     //Activated with menu UI button
@@ -28,9 +28,9 @@ public class MainGameController : MonoBehaviour
         SetupNextMinigame();
     }
 
-    public void FinishedMinigame() {
+    public void FinishedMinigame() 
+    {
         uiControllerRef.ShowMinigameScoreMenu();
-
         currentMinigame++;
     }
 
@@ -39,11 +39,11 @@ public class MainGameController : MonoBehaviour
         switch (currentMinigame)
         {
             case 0:
-                return "The Fridge Finder";
+                return "Lost And Found";
             case 1:
-                return "The Bread Cutter";
+                return "Vertical Slice";
             case 2:
-                return "The Toast Catcher";
+                return "It's Raining Bread";
             default:
                 return "Unknown";
         }
@@ -54,11 +54,11 @@ public class MainGameController : MonoBehaviour
         switch (currentMinigame)
         {
             case 0:
-                return "Open the fridge and find the bread";
+                return "Open the fridge.\n Find hidden bread.";
             case 1:
-                return "Cut the bread as instructed";
+                return "Cut bread in indicated spots.";
             case 2:
-                return "Catch all falling toast. Avoid burnt bread";
+                return "Catch all falling pieces of toast.\nAvoid burnt bread.";
             default:
                 return "Unknown";
         }

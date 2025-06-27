@@ -1,6 +1,5 @@
 using System.Collections;
 using TMPro;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -92,7 +91,7 @@ public class UIController : MonoBehaviour
     public void ShowPauseMenu()
     {
         gameConcludeGO.SetActive(false);
-        pauseMenuGO.SetActive(true);
+        pauseMenuGO.SetActive(!pauseMenuGO.activeSelf);
         overlay.gameObject.SetActive(!overlay.gameObject.activeSelf);
     }
 
@@ -100,6 +99,7 @@ public class UIController : MonoBehaviour
     {
         minigameInstructionsGO.SetActive(true);
         minigameInstructionsNameText.name = controllerRef.GetCurrentMinigameName();
+        minigameInstructionsNameText.text = controllerRef.GetCurrentMinigameName();
         minigameInstructionsDescriptionText.text = controllerRef.GetCurrentMinigameDescription();
         overlay.gameObject.SetActive(true);
     }
@@ -137,9 +137,6 @@ public class UIController : MonoBehaviour
         minigameScoreNameText.text = controllerRef.GetCurrentMinigameName();
         int currentUI = int.Parse(minigameScoreValueText.text);
         int targetScore = scoreRef.GetFinalScore();
-
-        Debug.Log(currentUI);
-        Debug.Log(targetScore);
 
         float waitTime = 0.5f;
         float rotation = 1f;
