@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using com.marufhow.meshslicer.extensions;
 using com.marufhow.meshslicer.model;
@@ -95,6 +96,15 @@ namespace com.marufhow.meshslicer.core
             _rightSlicedGameObject.transform.localScale = cutObject.transform.localScale * 0.5f;
             var rightRb = _rightSlicedGameObject.AddComponent<Rigidbody>();
             rightRb.AddForce( Vector3.right , ForceMode.Impulse);
+            cutObject.GetComponent<Rigidbody>().AddForce(Vector3.left, ForceMode.Impulse);
+            StartCoroutine(sendFlying(rightRb));
+        }
+
+        private IEnumerator sendFlying(Rigidbody rb)
+        {
+            yield return new WaitForSeconds(1f);
+            rb.mass = 100f;
+            rb.AddForce(Vector3.left * 1500f, ForceMode.Impulse);
         }
 
        

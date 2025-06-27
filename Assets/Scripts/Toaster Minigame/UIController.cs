@@ -1,6 +1,8 @@
 using System.Collections;
 using TMPro;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // This script handles the behaviour of UI elements (images).
 // Because we opted in for a one-scene approach, the job of this script
@@ -10,7 +12,6 @@ public class UIController : MonoBehaviour
 {
     [SerializeField] private PlayerScore scoreRef;
     [SerializeField] private MainGameController controllerRef;
-    //[SerializeField] private MinigameToastController controllerRef;
     [SerializeField] private RectTransform overlay;
     [SerializeField] private Animator menuAnimator;
 
@@ -69,7 +70,8 @@ public class UIController : MonoBehaviour
     public void ReturnToMenu()
     {
         //controllerRef.GameReset();
-        menuAnimator.SetTrigger("Return");
+        //menuAnimator.SetTrigger("Return");
+        SceneManager.LoadScene(0);
     }
 
     public void CreditsEnter()

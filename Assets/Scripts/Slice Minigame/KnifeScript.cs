@@ -6,8 +6,8 @@ using Debug = UnityEngine.Debug;
 
 public class KnifeScript : MonoBehaviour
 {
+    [SerializeField] private MinigameKnifeController controllerRef;
     [SerializeField] private MHCutter mhCutter;
-    [SerializeField] private GameObject breadGO;
     [SerializeField] private GameObject outlineGO;
     [SerializeField] private GameObject slicedOffParent;
     [SerializeField] private float sideMoveSpeed = 3f;      
@@ -15,6 +15,7 @@ public class KnifeScript : MonoBehaviour
     [SerializeField] private float verticalMoveSpeed = 1.5f;      
     [SerializeField] private float verticalMaxDistance = 3f;
 
+    private GameObject breadGO;
     private bool playerInControl = false;
     private bool slicing = false;
     private Stopwatch sideTime;
@@ -22,13 +23,14 @@ public class KnifeScript : MonoBehaviour
     private Vector3 startPosition;
     private IEnumerator MoveRoutine = null;
 
-    public void StartMinigame()
+    public void GainControl(GameObject bread)
     {
+        breadGO = bread;
         StartMoving();
         playerInControl = true;
     }
 
-    public void StopMinigame()
+    public void LoseControl()
     {
         StopAllMoving();
         playerInControl = false;
@@ -98,8 +100,7 @@ public class KnifeScript : MonoBehaviour
         }
 
         slicing = true;
-        float score = Mathf.Abs(transform.position.z - outlineGO.transform.position.z); //todo: add score
-        Debug.Log(score);
+
         HideOutline();
 
         verticalTime.Start();
@@ -127,6 +128,15 @@ public class KnifeScript : MonoBehaviour
     {
         yield return new WaitForSeconds(0.7f);
         mhCutter.Cut(breadGO, transform.position, Vector3.right, slicedOffParent);
+        playerInControl = false;
+
+        float maxScore = 10f;
+        float maxDistance = 0.5f;
+        float distance = Mathf.Abs(transform.position.x - outlineGO.transform.position.x);
+
+        int score = Mathf.RoundToInt(Mathf.Clamp01(1f - (distance / maxDistance)) * maxScore);
+
+        controllerRef.GetPoints(score);
     }
 
     private IEnumerator MovingCoroutine()

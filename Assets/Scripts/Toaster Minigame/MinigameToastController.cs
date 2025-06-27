@@ -14,6 +14,7 @@ public class MinigameToastController : MonoBehaviour
     [SerializeField] private PlayerMovement movementRef;
     [SerializeField] private ToastSpawner toasterRef;
     [SerializeField] private float targetTime = 30;
+    [SerializeField] private GameObject UIHolder;
     [SerializeField] private TMP_Text timerText;
     [SerializeField] private TMP_Text scoreText;
     private bool gameStarted = false;
@@ -35,13 +36,13 @@ public class MinigameToastController : MonoBehaviour
     {
         gameStarted = true;
         movementRef.SetPlayable(true);
+        UIHolder.SetActive(true);
         StartCoroutine(GameStartRoutine());
     }
 
     public void UnloadMinigame()
     {
-        //put unloading asynchronously here
-        Debug.Log("Minigame Unloaded: Knife Cutting");
+        StartCoroutine(UnloadAssetsAsync());
     }
 
     public void GrabbedToast(int score)
@@ -51,6 +52,7 @@ public class MinigameToastController : MonoBehaviour
         {
             currentScore = 0;
         }
+        scoreText.text = currentScore.ToString();
 
         movementRef.GrabbedToast(score);
     }
@@ -129,7 +131,7 @@ public class MinigameToastController : MonoBehaviour
         toasterRef.PopToasts(15, time);
     }
 
-    // Update the minigame UI to display current time left and the player's score.
+    // Update the minigame UI to display current time left.
     private void UpdateUI()
     {
         int time = ((int)currentTime);
@@ -142,8 +144,6 @@ public class MinigameToastController : MonoBehaviour
         {
             timerText.text = "0";
         }
-
-        scoreText.text = scoreRef.GetCurrentMinigameScore().ToString();
     }
 
     // Conclude the game, set game variables so that all unnecessary running systems are stopped.
@@ -151,24 +151,10 @@ public class MinigameToastController : MonoBehaviour
     {
         gameStarted = false;
         movementRef.SetPlayable(false);
+        UIHolder.SetActive(false);
         scoreRef.AddScore(currentScore); //add score variable
         gameController.FinishedMinigame();
     }
-
-    /*
-    // Clean up the state of the game.
-    // Resetting all positions and variables manually means that we don't have to reload the scene.
-    // By such, we're drastically lowering reloading times, skipping visual stutters (caused by recalculating)
-    // and reducing complexity that'd be introduced with asynchronous loading of data
-    public void GameReset()
-    {
-        gameStarted = false;
-        targetTime = 100f;
-        scoreRef.ResetMinigameScore();
-        movementRef.ResetPlayerPosition();
-        toasterRef.ResetScene();
-    }
-    */
 
     // Wait a frame to allow the rest of the minigame states to buffer, and then begin spawning toast
     private IEnumerator LoadAssetsAsync()
@@ -178,6 +164,13 @@ public class MinigameToastController : MonoBehaviour
         movementRef.gameObject.SetActive(true);
 
         gameController.MinigameLoaded = true;
+    }
+
+    private IEnumerator UnloadAssetsAsync()
+    {
+        yield return new WaitForSeconds(1.3f);
+        toasterRef.gameObject.SetActive(false);
+        movementRef.gameObject.SetActive(false);
     }
 
     private IEnumerator GameStartRoutine()
