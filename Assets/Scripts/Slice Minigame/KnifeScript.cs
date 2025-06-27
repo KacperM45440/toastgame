@@ -6,33 +6,53 @@ using Debug = UnityEngine.Debug;
 
 public class KnifeScript : MonoBehaviour
 {
+    [SerializeField] private MinigameKnifeController controllerRef;
     [SerializeField] private MHCutter mhCutter;
-    [SerializeField] private GameObject breadGO;
     [SerializeField] private GameObject outlineGO;
+    [SerializeField] private GameObject slicedOffParent;
     [SerializeField] private float sideMoveSpeed = 3f;      
     [SerializeField] private float sideMaxDistance = 2f;    
     [SerializeField] private float verticalMoveSpeed = 1.5f;      
     [SerializeField] private float verticalMaxDistance = 3f;
 
+    private GameObject breadGO;
+    private bool playerInControl = false;
+    private bool slicing = false;
     private Stopwatch sideTime;
     private Stopwatch verticalTime;
     private Vector3 startPosition;
     private IEnumerator MoveRoutine = null;
 
+    public void GainControl(GameObject bread)
+    {
+        breadGO = bread;
+        StartMoving();
+        playerInControl = true;
+    }
+
+    public void LoseControl()
+    {
+        StopAllMoving();
+        playerInControl = false;
+    }
+
     private void Start()
     {
         InitializeReferences();
-        StartMoving();
     }
 
     private void Update()
     {
+        if(!playerInControl)
+        {
+            return;
+        }
         HandleInput();
     }
 
     private void HandleInput()
     {
-        if (Input.GetMouseButtonDown(0)) // LMB
+        if (Input.GetMouseButtonDown(0) && !slicing) // LMB
         {
             StopAllMoving();
             StartSlicing();
@@ -79,8 +99,8 @@ public class KnifeScript : MonoBehaviour
             return;
         }
 
-        float score = Mathf.Abs(transform.position.x - outlineGO.transform.position.x); //todo: add score
-        Debug.Log(score);
+        slicing = true;
+
         HideOutline();
 
         verticalTime.Start();
@@ -98,7 +118,8 @@ public class KnifeScript : MonoBehaviour
             GetComponent<Rigidbody>().position = new Vector3(transform.position.x, startPosition.y - offset, transform.position.z);
             yield return null;
         }
-       
+
+        slicing = false;
         StopAllMoving();
         StartMoving();
     }
@@ -106,7 +127,16 @@ public class KnifeScript : MonoBehaviour
     private IEnumerator SliceRoutine()
     {
         yield return new WaitForSeconds(0.7f);
-        mhCutter.Cut(breadGO, transform.position, Vector3.right);
+        mhCutter.Cut(breadGO, transform.position, Vector3.right, slicedOffParent);
+        playerInControl = false;
+
+        float maxScore = 10f;
+        float maxDistance = 0.5f;
+        float distance = Mathf.Abs(transform.position.x - outlineGO.transform.position.x);
+
+        int score = Mathf.RoundToInt(Mathf.Clamp01(1f - (distance / maxDistance)) * maxScore);
+
+        controllerRef.GetPoints(score);
     }
 
     private IEnumerator MovingCoroutine()

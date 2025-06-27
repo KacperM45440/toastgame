@@ -8,25 +8,53 @@ using UnityEngine;
 // It's also easier to do in a scenario where we're doing everything on a single Unity scene
 public class MinigameToastController : MonoBehaviour
 {
+    [SerializeField] private MainGameController gameController;
     [SerializeField] private UIController uiControllerRef;
     [SerializeField] private PlayerScore scoreRef;
     [SerializeField] private PlayerMovement movementRef;
     [SerializeField] private ToastSpawner toasterRef;
-    [SerializeField] private float targetTime = 100f;
+    [SerializeField] private float targetTime = 30;
+    [SerializeField] private GameObject UIHolder;
     [SerializeField] private TMP_Text timerText;
     [SerializeField] private TMP_Text scoreText;
     private bool gameStarted = false;
+    private float currentTime = 0f;
+    private int currentScore = 0;
+    private bool stopSpawning = false;
 
-    private void Awake()
+    public void SetupMinigame()
     {
-        Application.targetFrameRate = 100;
+        gameStarted = false;
+        currentTime = targetTime;
+        scoreRef.ResetMinigameScore();
+        movementRef.ResetPlayerPosition();
+        toasterRef.ResetScene();
+        StartCoroutine(LoadAssetsAsync());
     }
 
-    public void GameStart()
+    public void StartMinigame()
     {
-        GameReset();
         gameStarted = true;
+        movementRef.SetPlayable(true);
+        UIHolder.SetActive(true);
         StartCoroutine(GameStartRoutine());
+    }
+
+    public void UnloadMinigame()
+    {
+        StartCoroutine(UnloadAssetsAsync());
+    }
+
+    public void GrabbedToast(int score)
+    {
+        currentScore += score;
+        if (currentScore < 0)
+        {
+            currentScore = 0;
+        }
+        scoreText.text = currentScore.ToString();
+
+        movementRef.GrabbedToast(score);
     }
 
     private void Update()
@@ -43,17 +71,23 @@ public class MinigameToastController : MonoBehaviour
         }
 
         // 1. That the UI is constantly being updated
-        targetTime -= Time.deltaTime;
+        currentTime -= Time.deltaTime;
         UpdateUI();
 
-        // 2. That toasts are being spawned, and two spawn processes aren't running at the same time (which would result in too many toasts)
-        if (((int)targetTime % 10 == 0) && toasterRef.IsToastRoutineNull())
+        //// 2. That toasts are being spawned, and two spawn processes aren't running at the same time (which would result in too many toasts)
+        //if (((int)currentTime % 10 == 0) && toasterRef.IsToastRoutineNull())
+        //{
+        //    //ManageToaster();
+        //}
+
+        if (toasterRef.IsToastRoutineNull() && !stopSpawning)
         {
-            ManageToaster();
+            ManageToasterLite();
         }
+        
 
         // 3. That when the player runs out of time, the game finishes.
-        if (targetTime <= 0.0f)
+        if (currentTime <= 0.0f)
         {
             GameFinished();
         }
@@ -71,7 +105,7 @@ public class MinigameToastController : MonoBehaviour
             // Ex: if you've played for 20 seconds, the timer's value would stand at 79 seconds
             // and this prompts the for loop to begin spawning amount of toasts applicable for the 80 second block passed.
             // In this case, it'd be i = 8 * 10 (80>=79), so (10-8)*2+1 = 5 toasts spawned for the next 10 second block.
-            if (i * 10 >= targetTime)
+            if (i * 10 >= currentTime)
             {
                 toastAmount = (10 - i) * 2 + 1;
                 toasterRef.PopToasts(toastAmount, 10f);
@@ -85,10 +119,22 @@ public class MinigameToastController : MonoBehaviour
         toasterRef.PopToasts(toastAmount, 8f);
     }
 
-    // Update the minigame UI to display current time left and the player's score.
+    // 25.06.25 - Simplified mechanic
+    private void ManageToasterLite()
+    {
+        float time = 10f;
+        if(currentTime <= 10f)
+        {
+            time = 7f;
+            stopSpawning = true;
+        }
+        toasterRef.PopToasts(15, time);
+    }
+
+    // Update the minigame UI to display current time left.
     private void UpdateUI()
     {
-        int time = ((int)targetTime);
+        int time = ((int)currentTime);
 
         if (time >= 0)
         {
@@ -98,34 +144,39 @@ public class MinigameToastController : MonoBehaviour
         {
             timerText.text = "0";
         }
-
-        scoreText.text = scoreRef.GetCurrentMinigameScore().ToString();
     }
 
     // Conclude the game, set game variables so that all unnecessary running systems are stopped.
     private void GameFinished()
     {
         gameStarted = false;
-        uiControllerRef.FinishedGame();
-    }
-
-    // Clean up the state of the game.
-    // Resetting all positions and variables manually means that we don't have to reload the scene.
-    // By such, we're drastically lowering reloading times, skipping visual stutters (caused by recalculating)
-    // and reducing complexity that'd be introduced with asynchronous loading of data
-    public void GameReset()
-    {
-        gameStarted = false;
-        targetTime = 100f;
-        scoreRef.ResetMinigameScore();
-        movementRef.ResetPlayerPosition();
-        toasterRef.ResetScene();
+        movementRef.SetPlayable(false);
+        UIHolder.SetActive(false);
+        scoreRef.AddScore(currentScore); //add score variable
+        gameController.FinishedMinigame();
     }
 
     // Wait a frame to allow the rest of the minigame states to buffer, and then begin spawning toast
+    private IEnumerator LoadAssetsAsync()
+    {
+        yield return new WaitForSeconds(0.8f);
+        toasterRef.gameObject.SetActive(true);
+        movementRef.gameObject.SetActive(true);
+
+        gameController.MinigameLoaded = true;
+    }
+
+    private IEnumerator UnloadAssetsAsync()
+    {
+        yield return new WaitForSeconds(1.3f);
+        toasterRef.gameObject.SetActive(false);
+        movementRef.gameObject.SetActive(false);
+    }
+
     private IEnumerator GameStartRoutine()
     {
         yield return null;
-        ManageToaster();
+        //ManageToaster();
+        ManageToasterLite();
     }
 }
