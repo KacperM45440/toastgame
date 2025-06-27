@@ -16,8 +16,8 @@ public class MinigameFridgeController : MonoBehaviour
     [SerializeField] private Rigidbody leftDoorRb;
     [SerializeField] private Rigidbody rightDoorRb;
     [SerializeField] private Button endButton;
+    [SerializeField] private GameObject UIHolder;
     [SerializeField] private TMP_Text timerText;
-    [SerializeField] private TMP_Text scoreText;
     [SerializeField] private float targetTime = 30f;
 
     private float currentTime = 0;
@@ -49,12 +49,14 @@ public class MinigameFridgeController : MonoBehaviour
 
         gameStarted = true;
         handController.GainControl(true);
+        UIHolder.SetActive(true);
     }
 
     public void MinigameFinished(bool playerWon)
     {
         gameStarted = false;
         gameScore = (int)currentTime;
+        UIHolder.SetActive(false);
 
         StartCoroutine(CloseFridge());
         handController.GainControl(false);
@@ -112,7 +114,7 @@ public class MinigameFridgeController : MonoBehaviour
     {
         handController.GetCursor().SetActive(false);
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         handController.gameObject.SetActive(false);
 
         foreach (SpawnPoint spawnPoint in spawnPoints)

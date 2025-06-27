@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using Unity.VisualScripting.FullSerializer;
 
 // This script is the bread and butter behind the mechanic responsible for spawning toast
 // and selecting positions on the grid where toast will end up falling.
@@ -10,8 +11,8 @@ public class ToastSpawner : MonoBehaviour
     [SerializeField] private Transform secondBreadParent;
     [SerializeField] private Transform particleParent;
 
-    private Vector3 toasterLeftPos = new Vector3(-13.4589996f, 5.27780819f, -7.93316507f);
-    private Vector3 toasterRightPos = new Vector3(-13.3520002f, 5.27780819f, -8.30700016f);
+    private Vector3 toasterLeftPos = new Vector3(1.02600002f, 0.495999992f, -7.94000006f);
+    private Vector3 toasterRightPos = new Vector3(1.14100003f, 0.495999992f, -8.31299973f);
     private Dictionary<int, Vector3> spawnPositions;
     private IEnumerator ToastRoutine = null; // Explained later
 
@@ -145,6 +146,12 @@ public class ToastSpawner : MonoBehaviour
             { 46, new Vector3(-8.3f, 20f, -9f) },
             { 47, new Vector3(-8.3f, 20f, -12f) },
         };
+
+        for (int i = 0; i < spawnPositions.Count;  i++)
+        {
+            Vector3 entry = spawnPositions[i];
+            spawnPositions[i] = new Vector3(entry.x + 14.5f, entry.y - 4.5f, entry.z);
+        }
     }
 
     // To ensure only one coroutine will run every 10 seconds (with no duplicates)

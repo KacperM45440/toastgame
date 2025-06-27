@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using com.marufhow.meshslicer.extensions;
 using com.marufhow.meshslicer.model;
@@ -20,7 +21,7 @@ namespace com.marufhow.meshslicer.core
         private List<Vector3> _addedVertices;
         private List<Vector3> _fillAreaVertex;
         private List<Vector2> _uvs;
-        public void Cut(GameObject cutObject,Vector3 cutPoint, Vector3 cutNormal)
+        public void Cut(GameObject cutObject,Vector3 cutPoint, Vector3 cutNormal, GameObject slicedParent)
         {
             // The InverseTransformDirection method is used here to convert the cutNormal from world space to the local space of the cutObject.
             Plane plane = new Plane(cutObject.transform.InverseTransformDirection(-cutNormal),  
@@ -41,7 +42,9 @@ namespace com.marufhow.meshslicer.core
             {
                 _rightMesh = _rightSlicedGameObject.AddComponent<MHMesh>();
             }
-            
+
+            _rightSlicedGameObject.transform.SetParent(slicedParent.transform);
+
             _leftMesh.Clear();
             _rightMesh.Clear();
 
@@ -90,9 +93,18 @@ namespace com.marufhow.meshslicer.core
             
             _rightSlicedGameObject.transform.position = cutObject.transform.position + Vector3.right * 0.1f;
             _rightSlicedGameObject.transform.rotation = cutObject.transform.rotation;
-            _rightSlicedGameObject.transform.localScale = cutObject.transform.localScale;
+            _rightSlicedGameObject.transform.localScale = cutObject.transform.localScale * 0.5f;
             var rightRb = _rightSlicedGameObject.AddComponent<Rigidbody>();
             rightRb.AddForce( Vector3.right , ForceMode.Impulse);
+            cutObject.GetComponent<Rigidbody>().AddForce(Vector3.left, ForceMode.Impulse);
+            StartCoroutine(sendFlying(rightRb));
+        }
+
+        private IEnumerator sendFlying(Rigidbody rb)
+        {
+            yield return new WaitForSeconds(1f);
+            rb.mass = 100f;
+            rb.AddForce(Vector3.left * 1500f, ForceMode.Impulse);
         }
 
        

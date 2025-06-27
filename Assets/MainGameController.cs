@@ -9,11 +9,17 @@ public class MainGameController : MonoBehaviour
 
     [SerializeField] private UIController uiControllerRef;
     [SerializeField] private CameraController cameraControllerRef;
-    [SerializeField] MinigameFridgeController minigame1Controller;
-    [SerializeField] MinigameKnifeController minigame2Controller;
-    [SerializeField] MinigameToastController minigame3Controller;
+    [SerializeField] private MinigameFridgeController minigame1Controller;
+    [SerializeField] private MinigameKnifeController minigame2Controller;
+    [SerializeField] private MinigameToastController minigame3Controller;
+    [SerializeField] private GameObject dancingRat;
 
-    private int currentMinigame = 0;
+    [SerializeField] [Range(0,3)] private int currentMinigame = 0;
+
+    private void Awake()
+    {
+        Application.targetFrameRate = 60;
+    }
 
     //Activated with menu UI button
     //Activates setup of 1st minigame and starts camera movement
@@ -50,9 +56,9 @@ public class MainGameController : MonoBehaviour
             case 0:
                 return "Open the fridge and find the bread";
             case 1:
-                return "Cut the bread in equal slices";
+                return "Cut the bread as instructed";
             case 2:
-                return "Catch all falling toast";
+                return "Catch all falling toast. Avoid burnt bread";
             default:
                 return "Unknown";
         }
@@ -75,7 +81,7 @@ public class MainGameController : MonoBehaviour
                 minigame2Controller.StartMinigame();
                 break;
             case 2:
-                //minigame3Controller.StartMinigame();
+                minigame3Controller.StartMinigame();
                 break;
             default:
                 break;
@@ -98,13 +104,18 @@ public class MainGameController : MonoBehaviour
                 minigame1Controller.UnloadMinigame();
                 minigame2Controller.SetupMinigame();
                 cameraControllerRef.NextCameraSpot(currentMinigame);
-                StartCoroutine(WaitThenShowInstructions(2));
+                StartCoroutine(WaitThenShowInstructions(4));
                 break;
             case 2:
                 minigame2Controller.UnloadMinigame();
-                //minigame3Controller.SetupMinigame();
+                minigame3Controller.SetupMinigame();
                 cameraControllerRef.NextCameraSpot(currentMinigame);
-                StartCoroutine(WaitThenShowInstructions(2));
+                StartCoroutine(WaitThenShowInstructions(4));
+                break;
+            case 3:
+                minigame3Controller.UnloadMinigame();
+                cameraControllerRef.NextCameraSpot(currentMinigame);
+                StartCoroutine(WaitThenShowSummary());
                 break;
             default:
                 break;
@@ -115,5 +126,13 @@ public class MainGameController : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
         uiControllerRef.ShowMinigameInstructionsMenu();
+    }
+
+    private IEnumerator WaitThenShowSummary()
+    {
+        yield return new WaitForSeconds(1);
+        dancingRat.SetActive(true);
+        yield return new WaitForSeconds(3);
+        uiControllerRef.FinishedGame();
     }
 }
